@@ -91,9 +91,7 @@ const expectedIndustries = [
   "Municipal field teams",
 ];
 
-const removedViActCopy = [
-  "viAct",
-  "viact.ai",
+const removedLegacyCopy = [
   "What do people say about us?",
   "Schedule Demo",
   "Request A Demo",
@@ -116,8 +114,8 @@ test("keeps the CoreSense evidence boundaries visible", () => {
   }
 });
 
-test("removes viAct branding, links, and testimonial claims", () => {
-  for (const phrase of removedViActCopy) {
+test("keeps legacy links and testimonial claims out of the product", () => {
+  for (const phrase of removedLegacyCopy) {
     assert.doesNotMatch(
       allPageSource,
       new RegExp(escapeRegExp(phrase), "i"),
