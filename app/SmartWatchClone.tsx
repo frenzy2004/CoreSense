@@ -109,6 +109,57 @@ const navMenus = [
   },
 ];
 
+const linkMap: Record<string, string> = {
+  "Computer Vision Platform": "https://www.viact.ai/video-analytics-solution",
+  "Modules Hub": "https://www.viact.ai/aimodules",
+  "Near Miss Detection":
+    "https://www.viact.ai/video-analytics-solution/near-miss-detection",
+  "Worker Fatigue Detection":
+    "https://www.viact.ai/video-analytics-solution/worker-fatigue-detection",
+  "Unconscious Worker Detection":
+    "https://www.viact.ai/video-analytics-solution/unconscious-worker-detection",
+  Manufacturing:
+    "https://www.viact.ai/industry/manufacturing-ai-safety-solution",
+  "Automotive and EV":
+    "https://www.viact.ai/manufacturing/ai-for-automotive-ev-industry",
+  "Food and Beverage":
+    "https://www.viact.ai/manufacturing/ai-for-food-beverage-industry",
+  Construction:
+    "https://www.viact.ai/industry/construction-ai-safety-solution",
+  Mining: "https://www.viact.ai/mining",
+  "Oil and Gas": "https://www.viact.ai/industry/oil-and-gas-ai-safety-solution",
+  Logistics:
+    "https://www.viact.ai/industry/logistics-supply-chain-ai-safety-solution",
+  "Smart Watch": "https://www.viact.ai/iot/smart-watch",
+  "Smart Helmet": "https://www.viact.ai/iot/smart-helmet",
+  "viLID - LiDAR": "https://www.viact.ai/vilid",
+  "viAER - Drone": "https://www.viact.ai/viaer",
+  "viMOV - Mobility": "https://www.viact.ai/vimov",
+  "viHUB Platform": "https://www.viact.ai/vihub",
+  "4S Safety System": "https://www.viact.ai/smart-site-safety-system",
+  "Permit to Work": "https://www.viact.ai/permit-to-work-software",
+  "Crane Safety": "https://www.viact.ai/solutions/crane-safety-software",
+  "Forklift Safety": "https://www.viact.ai/solutions/forklift-safety-system",
+  "Vehicle Control":
+    "https://www.viact.ai/solutions/vehicle-control-management-software",
+  "Lone Worker Monitoring":
+    "https://www.viact.ai/solutions/lone-worker-monitoring-system",
+  "Incident Management":
+    "https://www.viact.ai/solutions/incident-management-software",
+  "Area Control": "https://www.viact.ai/solutions/area-control-safety-system",
+  "Space Management":
+    "https://www.viact.ai/solutions/industrial-space-management-solution",
+  "Channel Partner": "https://www.viact.ai/channel-partner-program",
+  "Reseller Partner": "https://www.viact.ai/reseller-partner-program",
+  "Tech Partner": "https://www.viact.ai/tech-partner-program",
+  "Case Studies": "https://www.viact.ai/case-studies",
+  Guides: "https://www.viact.ai/guides",
+  Glossary: "https://www.viact.ai/glossary",
+  Blog: "https://www.viact.ai/blogs",
+};
+
+const hrefFor = (label: string) => linkMap[label] ?? "https://www.viact.ai";
+
 const overviewCards = [
   {
     title: "More Than a Wearable",
@@ -172,17 +223,17 @@ const useCases = [
     body: "Track heart rate, temperature, SpO2, movement, and status trends so EHS teams can act on changing conditions.",
   },
   {
-    label: "Emergency Response",
+    label: "Emergency Response Coordination",
     title: "Faster Response Coordination",
     body: "Manual SOS and automatic escalation help responders locate workers and triage incidents without waiting for radio check-ins.",
   },
   {
-    label: "Compliance Reporting",
+    label: "Regulatory Compliance and Reporting",
     title: "Compliance-Ready Logs",
     body: "Site teams can review timestamped alerts, worker status, and incident histories for safety audits and trend reporting.",
   },
   {
-    label: "Remote Supervision",
+    label: "Remote Monitoring for Supervisors",
     title: "Remote Monitoring",
     body: "Supervisors get site-wide visibility across remote, confined, underground, and low-connectivity environments.",
   },
@@ -262,12 +313,24 @@ const faqs = [
     "Yes. Motion sensors, biometric trends, and configurable thresholds can trigger alerts for fatigue, falls, motionless states, critical vitals, and manual or automatic SOS.",
   ],
   [
+    "How does it help prevent heat stress?",
+    "Skin temperature, heart rate, SpO2, and weather-station context can trigger early warnings so workers and supervisors can intervene before collapse or impairment.",
+  ],
+  [
+    "How does it protect lone workers?",
+    "Location tracking, motionless-worker detection, fall detection, SOS escalation, and edge processing support workers in remote, confined, underground, or low-connectivity zones.",
+  ],
+  [
     "Which industries benefit most?",
     "Construction, oil and gas, mining, manufacturing, and logistics benefit most because workers often operate in zones where supervisors cannot continuously see them.",
   ],
   [
-    "Can it work in remote or low-connectivity areas?",
-    "The system can support edge and hybrid deployments so safety logic can keep running close to the site when cloud connectivity is limited.",
+    "How much does viAct's Smart Watch cost?",
+    "Pricing depends on device count, activated modules, connectivity, deployment model, and contract length. The original page directs commercial questions to sales or a demo.",
+  ],
+  [
+    "How does it protect worker privacy?",
+    "The system treats biometric data as safety and operational data, uses role-based access, encrypts data in transit and at rest, and supports on-premises deployment where required.",
   ],
 ];
 
@@ -295,7 +358,7 @@ export function SmartWatchClone() {
   return (
     <main className="site-shell">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="viAct home">
+        <a className="brand" href="https://www.viact.ai" aria-label="viAct home">
           <img src={image.logo} alt="viAct" />
         </a>
 
@@ -308,7 +371,7 @@ export function SmartWatchClone() {
                   <div key={title}>
                     <p>{title}</p>
                     {items.map((item) => (
-                      <a href="#overview" key={item}>
+                      <a href={hrefFor(item)} key={item}>
                         {item}
                       </a>
                     ))}
@@ -319,7 +382,7 @@ export function SmartWatchClone() {
           ))}
         </nav>
 
-        <Button href="#demo">Schedule Demo</Button>
+        <Button href="https://www.viact.ai/demo">Schedule Demo</Button>
         <button
           className="mobile-toggle"
           aria-label="Toggle navigation"
@@ -339,7 +402,7 @@ export function SmartWatchClone() {
               {menu.groups.flatMap(([, ...items]) =>
                 items.map((item) => (
                   <a
-                    href="#overview"
+                    href={hrefFor(item)}
                     key={item}
                     onClick={() => setMobileOpen(false)}
                   >
@@ -349,7 +412,7 @@ export function SmartWatchClone() {
               )}
             </details>
           ))}
-          <Button href="#demo">Schedule Demo</Button>
+          <Button href="https://www.viact.ai/demo">Schedule Demo</Button>
         </div>
       ) : null}
 
@@ -361,7 +424,7 @@ export function SmartWatchClone() {
             AI and IoT worker monitoring for safer sites, faster response, and
             better operational visibility.
           </p>
-          <Button href="#overview">Explore</Button>
+          <Button href="https://www.viact.ai/demo">Explore</Button>
         </div>
         <div className="watch-stage" aria-label="Smart watch product preview">
           <img src={image.watch} alt="AI-powered industrial smart watch" />
@@ -395,7 +458,7 @@ export function SmartWatchClone() {
             </article>
           ))}
         </div>
-        <Button href="#demo">Get Started Now</Button>
+        <Button href="https://www.viact.ai/demo">Get Started Now</Button>
       </section>
 
       <section className="features section-pad">
@@ -417,7 +480,7 @@ export function SmartWatchClone() {
             </article>
           ))}
         </div>
-        <Button href="#demo">Try Now</Button>
+        <Button href="https://www.viact.ai/demo">Try Now</Button>
       </section>
 
       <section className="use-cases section-pad">
