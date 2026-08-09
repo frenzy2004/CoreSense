@@ -14,6 +14,14 @@ const contentSource = await readFile(
   new URL("../app/coresense-content.ts", import.meta.url),
   "utf8",
 );
+const documentLibrarySource = await readFile(
+  new URL("../app/DocumentLibrary.tsx", import.meta.url),
+  "utf8",
+).catch(() => "");
+const docsManifestSource = await readFile(
+  new URL("../app/docs-manifest.ts", import.meta.url),
+  "utf8",
+).catch(() => "");
 const layoutSource = await readFile(
   new URL("../app/layout.tsx", import.meta.url),
   "utf8",
@@ -30,7 +38,7 @@ const faviconSource = await readFile(
   new URL("../public/favicon.svg", import.meta.url),
   "utf8",
 );
-const allPageSource = `${appSource}\n${contentSource}\n${cssSource}\n${layoutSource}\n${pageSource}\n${indexSource}\n${faviconSource}`;
+const allPageSource = `${appSource}\n${contentSource}\n${documentLibrarySource}\n${docsManifestSource}\n${cssSource}\n${layoutSource}\n${pageSource}\n${indexSource}\n${faviconSource}`;
 const vercelConfig = JSON.parse(
   await readFile(new URL("../vercel.json", import.meta.url), "utf8"),
 );
@@ -153,6 +161,38 @@ test("maps each primary story to a distinct media asset", () => {
   ]) {
     assert.match(contentSource, new RegExp(escapeRegExp(mediaKey)));
   }
+});
+
+test("plays the supplied product video in the overview lead", () => {
+  const overviewLeadBlock = contentSource.match(
+    /export const overviewLead = \{[\s\S]*?\n\};/,
+  )?.[0];
+
+  assert.ok(overviewLeadBlock);
+  assert.match(
+    overviewLeadBlock,
+    /media:\s*coreSenseImages\.productVideo/,
+  );
+});
+
+test("ships every supplied Markdown document in the in-site library", async () => {
+  const docPaths = [
+    ...docsManifestSource.matchAll(/path:\s*"([^"]+\.md)"/g),
+  ].map(([, docPath]) => docPath);
+
+  assert.equal(docPaths.length, 31);
+  for (const docPath of docPaths) {
+    await access(new URL(`../public/docs/${docPath}`, import.meta.url));
+  }
+
+  assert.match(documentLibrarySource, /ReactMarkdown/);
+  assert.match(documentLibrarySource, /remarkGfm/);
+  assert.match(documentLibrarySource, /aria-label="Close document viewer"/);
+  assert.match(appSource, /Browse all documents/);
+  assert.match(
+    appSource,
+    /className="evidence-source document-trigger"/,
+  );
 });
 
 test("keeps a logo-only header", () => {

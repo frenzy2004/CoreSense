@@ -2,7 +2,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   conceptDisclosure,
   coreSenseImages,
@@ -20,6 +20,12 @@ import {
   useCases,
   type Media,
 } from "./coresense-content";
+
+const DocumentLibrary = lazy(() =>
+  import("./DocumentLibrary").then((module) => ({
+    default: module.DocumentLibrary,
+  })),
+);
 
 function Button({
   href,
@@ -147,6 +153,7 @@ function MediaFrame({
 
 export function SmartWatchClone() {
   const [selectedCase, setSelectedCase] = useState(0);
+  const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const currentCase = useCases[selectedCase];
 
   return (
@@ -226,7 +233,13 @@ export function SmartWatchClone() {
                 <span className="feature-eyebrow">{feature.eyebrow}</span>
                 <h3>{feature.title}</h3>
                 <p>{feature.body}</p>
-                <span className="feature-proof">{feature.proof}</span>
+                <button
+                  className="feature-proof document-trigger"
+                  type="button"
+                  onClick={() => setSelectedDocument(feature.sourceDoc)}
+                >
+                  {feature.proof}
+                </button>
               </div>
               <MediaFrame className="feature-media-frame" media={feature.media} />
             </article>
@@ -328,7 +341,16 @@ export function SmartWatchClone() {
       <section className="reviews evidence section-pad" id="evidence">
         <div className="reviews-shell">
           <div className="reviews-badge">Evidence</div>
-          <h2>What CoreSense can prove today</h2>
+          <div className="evidence-heading-row">
+            <h2>What CoreSense can prove today</h2>
+            <button
+              className="docs-button"
+              type="button"
+              onClick={() => setSelectedDocument("ONE-PAGE-SUMMARY.md")}
+            >
+              Browse all documents
+            </button>
+          </div>
           <article className="evidence-lead">
             <MediaFrame className="evidence-lead-media" media={evidenceLead.media} />
             <div className="evidence-lead-copy">
@@ -343,7 +365,13 @@ export function SmartWatchClone() {
                 <span className="evidence-label">{card.label}</span>
                 <h3>{card.title}</h3>
                 <p>{card.body}</p>
-                <span className="evidence-source">Source: {card.source}</span>
+                <button
+                  className="evidence-source document-trigger"
+                  type="button"
+                  onClick={() => setSelectedDocument(card.source)}
+                >
+                  Source: {card.source}
+                </button>
               </article>
             ))}
           </div>
@@ -409,6 +437,15 @@ export function SmartWatchClone() {
           <p>Source material supplied with the project documentation.</p>
         </div>
       </footer>
+      {selectedDocument ? (
+        <Suspense fallback={null}>
+          <DocumentLibrary
+            selectedPath={selectedDocument}
+            onSelect={setSelectedDocument}
+            onClose={() => setSelectedDocument(null)}
+          />
+        </Suspense>
+      ) : null}
     </main>
   );
 }

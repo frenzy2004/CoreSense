@@ -21,6 +21,7 @@ export type FeatureRow = {
   media: Media;
   imageFirst: boolean;
   proof: string;
+  sourceDoc: string;
 };
 
 export type UseCase = {
@@ -118,7 +119,7 @@ export const coreSenseImages = {
 export const overviewLead = {
   title: "Sense. Estimate. Decide. Act. Record.",
   body: "The band senses personal and site conditions, estimates heat strain with uncertainty, chooses a worker action, escalates when needed, and records the response.",
-  media: coreSenseImages.product,
+  media: coreSenseImages.productVideo,
 };
 
 export const overviewTiles: OverviewTile[] = [
@@ -164,6 +165,7 @@ export const featureRows: FeatureRow[] = [
     media: coreSenseImages.wokwiBuild,
     imageFirst: false,
     proof: "Engineering basis: science.md and WOKWI-VERIFICATION.md",
+    sourceDoc: "science.md",
   },
   {
     eyebrow: "Act",
@@ -172,6 +174,7 @@ export const featureRows: FeatureRow[] = [
     media: coreSenseImages.heat,
     imageFirst: true,
     proof: "Interaction contract: ONE-PAGE-SUMMARY.md",
+    sourceDoc: "ONE-PAGE-SUMMARY.md",
   },
   {
     eyebrow: "Fallback",
@@ -180,6 +183,7 @@ export const featureRows: FeatureRow[] = [
     media: coreSenseImages.storm,
     imageFirst: false,
     proof: "Claim boundary: limitations.md",
+    sourceDoc: "limitations.md",
   },
 ];
 
