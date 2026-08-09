@@ -13,18 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "viAct Smart Watch | AI-IoT Worker Safety",
+  title: "CoreSense | Personal Heat-Risk Safety",
   description:
-    "A product-led recreation of the viAct smart watch page for industrial worker safety.",
+    "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
   openGraph: {
-    title: "viAct Smart Watch",
-    description: "AI-IoT worker safety for industrial sites.",
+    title: "CoreSense | Personal Heat-Risk Safety",
+    description:
+      "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "viAct Smart Watch",
-    description: "AI-IoT worker safety for industrial sites.",
+    title: "CoreSense | Personal Heat-Risk Safety",
+    description:
+      "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
     images: ["/og.png"],
   },
   icons: {

@@ -14,7 +14,23 @@ const contentSource = await readFile(
   new URL("../app/coresense-content.ts", import.meta.url),
   "utf8",
 );
-const allPageSource = `${appSource}\n${contentSource}\n${cssSource}`;
+const layoutSource = await readFile(
+  new URL("../app/layout.tsx", import.meta.url),
+  "utf8",
+);
+const pageSource = await readFile(
+  new URL("../app/page.tsx", import.meta.url),
+  "utf8",
+);
+const indexSource = await readFile(
+  new URL("../index.html", import.meta.url),
+  "utf8",
+);
+const faviconSource = await readFile(
+  new URL("../public/favicon.svg", import.meta.url),
+  "utf8",
+);
+const allPageSource = `${appSource}\n${contentSource}\n${cssSource}\n${layoutSource}\n${pageSource}\n${indexSource}\n${faviconSource}`;
 const vercelConfig = JSON.parse(
   await readFile(new URL("../vercel.json", import.meta.url), "utf8"),
 );
@@ -88,7 +104,10 @@ test("removes viAct branding, links, and testimonial claims", () => {
       new RegExp(escapeRegExp(phrase), "i"),
     );
   }
-  assert.doesNotMatch(allPageSource, /https?:\/\//);
+  assert.doesNotMatch(
+    `${appSource}\n${contentSource}\n${layoutSource}\n${pageSource}\n${indexSource}`,
+    /https?:\/\//,
+  );
 });
 
 test("references only existing local CoreSense media", async () => {
@@ -110,6 +129,35 @@ test("keeps a logo-only header", () => {
 
 test("keeps new visible copy free of em dashes", () => {
   assert.doesNotMatch(allPageSource, /\u2014/);
+});
+
+test("styles CoreSense branding, disclosures, and evidence cards", () => {
+  for (const selector of [
+    ".brand-mark",
+    ".media-disclosure",
+    ".evidence-card",
+    ".evidence-source",
+  ]) {
+    assert.match(cssSource, new RegExp(escapeRegExp(selector)));
+  }
+});
+
+test("constrains the mobile hero to the viewport", () => {
+  assert.match(cssSource, /grid-template-columns:\s*minmax\(0, 1fr\)/);
+  assert.match(cssSource, /\.hero-copy\s*{[^}]*min-width:\s*0/s);
+});
+
+test("ships CoreSense metadata and identity assets", async () => {
+  for (const phrase of [
+    "CoreSense | Personal Heat-Risk Safety",
+    "Individual heat-strain guidance for industrial workers",
+  ]) {
+    assert.match(layoutSource, new RegExp(escapeRegExp(phrase)));
+    assert.match(pageSource, new RegExp(escapeRegExp(phrase)));
+    assert.match(indexSource, new RegExp(escapeRegExp(phrase)));
+  }
+  assert.match(faviconSource, />CS<\/text>/);
+  await access(new URL("../public/og.png", import.meta.url));
 });
 
 test("ships a Vercel static site instead of an empty Vinext client folder", () => {

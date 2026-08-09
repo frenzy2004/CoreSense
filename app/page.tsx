@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { SmartWatchClone } from "./SmartWatchClone";
 
 export const metadata: Metadata = {
-  title: "viAct Smart Watch | AI-IoT Worker Safety",
+  title: "CoreSense | Personal Heat-Risk Safety",
   description:
-    "A close recreation of the viAct industrial smart watch landing page with AI-IoT safety sections, use cases, industries, reviews, and FAQ.",
+    "Individual heat-strain guidance for industrial workers, with edge intelligence, clear escalation, and an accountable supervisor trail.",
 };
 
 export default function Home() {
