@@ -401,10 +401,6 @@ export function SmartWatchClone() {
             </a>
           ))}
         </nav>
-        <div className="footer-bottom">
-          <p>CoreSense prototype integration brief, 2026.</p>
-          <p>Source material supplied with the project documentation.</p>
-        </div>
       </footer>
       {selectedDocument ? (
         <Suspense fallback={null}>

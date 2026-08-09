@@ -202,6 +202,16 @@ test("keeps a logo-only header", () => {
   assert.doesNotMatch(appSource, /aria-label="Toggle navigation"/);
 });
 
+test("removes the footer attribution bar", () => {
+  assert.doesNotMatch(appSource, /footer-bottom/);
+  assert.doesNotMatch(appSource, /prototype integration brief, 2026/i);
+  assert.doesNotMatch(
+    appSource,
+    /Source material supplied with the project documentation/i,
+  );
+  assert.doesNotMatch(cssSource, /\.footer-bottom/);
+});
+
 test("does not layer a separate product watch over the hero", () => {
   assert.doesNotMatch(appSource, /className="hero-product"/);
 });

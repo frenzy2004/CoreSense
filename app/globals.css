@@ -1317,18 +1317,6 @@ footer p {
   color: var(--accent);
 }
 
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.footer-bottom p {
-  color: #8d8b87;
-  font-size: 0.86rem;
-}
-
 @media (max-width: 1180px) {
   .hero h1 {
     font-size: 4.35rem;
@@ -1653,11 +1641,6 @@ footer p {
 
   .site-footer {
     padding: 4rem 1.15rem 1.4rem;
-  }
-
-  .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .document-viewer-bar {
