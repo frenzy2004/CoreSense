@@ -10,20 +10,32 @@ const image = {
     "https://static.wixstatic.com/media/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg/v1/fill/w_147,h_97,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg",
   watch:
     "https://static.wixstatic.com/media/d8b625_56b9a7f882594b4ba58cb15b601a92b9~mv2.png/v1/crop/x_0,y_0,w_535,h_806/fill/w_535,h_805,al_c,q_90,enc_avif,quality_auto/sw-item.png",
-  overview:
+  overviewLead:
     "https://static.wixstatic.com/media/d8b625_c69f53b5639d44a78ece468e366a0f44~mv2.png/v1/crop/x_79,y_0,w_1637,h_504/fill/w_1631,h_504,al_c,q_90,enc_avif,quality_auto/1.png",
-  ai:
+  overviewAi:
     "https://static.wixstatic.com/media/d8b625_14e311c8ec3748f2856071e9cb35ce67~mv2.png/v1/fill/w_842,h_504,al_c,q_90,enc_avif,quality_auto/2.png",
-  iot:
+  overviewIot:
     "https://static.wixstatic.com/media/d8b625_e04c7247a4c54b30b2c0b2692637937d~mv2.png/v1/crop/x_16,y_0,w_827,h_504/fill/w_827,h_504,al_c,q_90,enc_avif,quality_auto/3.png",
-  rugged:
+  overviewVersatile:
     "https://static.wixstatic.com/media/d8b625_e02bd3a108424becbec624777112d1df~mv2.png/v1/fill/w_842,h_504,al_c,q_90,enc_avif,quality_auto/4.png",
-  battery:
+  overviewWorkforce:
     "https://static.wixstatic.com/media/d8b625_3c1b566537a54a7a9baa4a08d3ccf4d1~mv2.png/v1/crop/x_19,y_0,w_824,h_504/fill/w_824,h_504,al_c,q_90,enc_avif,quality_auto/5.png",
+  feature1:
+    "https://static.wixstatic.com/media/d8b625_f9b37c3f86de455ab3bbfa4992d6fc05~mv2.png/v1/crop/x_6,y_0,w_1098,h_615/fill/w_1098,h_615,al_c,q_90,enc_avif,quality_auto/Feature-1.png",
+  feature2:
+    "https://static.wixstatic.com/media/d8b625_ead9de31e58b402a845ab9b2195a29df~mv2.png/v1/crop/x_6,y_0,w_1098,h_615/fill/w_1098,h_615,al_c,q_90,enc_avif,quality_auto/Feature-2.png",
+  feature3:
+    "https://static.wixstatic.com/media/d8b625_9d685d27d32f4a9a9bc8ccec4dc4659e~mv2.png/v1/crop/x_20,y_0,w_1069,h_615/fill/w_1069,h_615,al_c,q_90,enc_avif,quality_auto/Feature-3.png",
+  feature4:
+    "https://static.wixstatic.com/media/d8b625_e50bdab4f3f5400fad10b3133fada8f1~mv2.png/v1/crop/x_6,y_0,w_1098,h_615/fill/w_1098,h_615,al_c,q_90,enc_avif,quality_auto/Feature-4.png",
+  feature5:
+    "https://static.wixstatic.com/media/d8b625_aee1580cccea4b3bb5a3f3c0c851d91b~mv2.png/v1/fill/w_1110,h_597,al_c,q_90,enc_avif,quality_auto/Feature-5.png",
   useCase:
     "https://static.wixstatic.com/media/d8b625_30c1eafbfe70478e84ffbbb38a5de072~mv2.png/v1/fill/w_1028,h_669,al_c,q_90,enc_avif,quality_auto/d8b625_30c1eafbfe70478e84ffbbb38a5de072~mv2.png",
-  testimonial:
+  reviewArrow:
     "https://static.wixstatic.com/media/d8b625_fa91e1d9cc6046409a8c62d23c680872~mv2.png/v1/fill/w_198,h_268,al_c,lg_1,q_85,enc_avif,quality_auto/darrow%201_edited_edited.png",
+  avatar:
+    "https://static.wixstatic.com/media/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg",
 };
 
 const awards = [
@@ -160,54 +172,75 @@ const linkMap: Record<string, string> = {
 
 const hrefFor = (label: string) => linkMap[label] ?? "https://www.viact.ai";
 
-const overviewCards = [
+const overviewLead = {
+  title: "More Than a Wearable",
+  body: "A cutting-edge tool designed to enhance safety and productivity in demanding work environments.",
+  img: image.overviewLead,
+};
+
+const overviewTiles = [
   {
-    title: "More Than a Wearable",
-    body: "A wrist-level safety node built for demanding industrial environments.",
-    img: image.overview,
-  },
-  {
-    title: "Advanced AI Signals",
-    body: "Health, movement, location, and risk signals are translated into timely alerts.",
-    img: image.ai,
+    title: "Advanced AI Capabilities",
+    bullets: [
+      "Delivers real-time health monitoring.",
+      "Provides predictive safety alerts to prevent accidents before they happen.",
+    ],
+    img: image.overviewAi,
   },
   {
     title: "Robust IoT Integration",
-    body: "The watch connects with site systems, dashboards, and response workflows.",
-    img: image.iot,
+    bullets: [
+      "Seamlessly connects to other devices and systems for streamlined operations.",
+      "Ensures uninterrupted communication across teams.",
+    ],
+    img: image.overviewIot,
   },
   {
-    title: "Connected Workforce",
-    body: "Workers stay visible, informed, and reachable across active site zones.",
-    img: image.rugged,
+    title: "Versatile Applications",
+    bullets: [
+      "Ideal for construction sites, manufacturing facilities, and other high-risk work environments.",
+    ],
+    img: image.overviewVersatile,
+  },
+  {
+    title: "Empowering the Workforce",
+    bullets: [
+      "Keeps users connected, informed, and safe-maximizing efficiency and peace of mind.",
+    ],
+    img: image.overviewWorkforce,
   },
 ];
 
-const featureTiles = [
+const featureRows = [
   {
-    title: "AI-enhanced monitoring",
-    body: "Continuous biometric, motion, and environmental context helps safety teams spot risk before it turns into an incident.",
-    img: image.ai,
+    title: "AI-Enhanced Monitoring",
+    body: "The viAct Smart Watch leverages proprietary computer vision AI to provide real-time health and safety monitoring. It ensures users remain aware of their physical condition and surroundings, enhancing both safety and situational awareness.",
+    img: image.feature1,
+    imageFirst: false,
   },
   {
-    title: "Custom alerts",
-    body: "Configure notifications for heat stress, falls, motionless workers, SOS events, and zone-based warnings.",
-    img: image.overview,
+    title: "Customizable Alerts",
+    body: "Tailor notifications to specific needs, such as health metrics or safety warnings. This feature allows for immediate action in critical situations, providing a personalized and proactive safety approach.",
+    img: image.feature2,
+    imageFirst: true,
   },
   {
-    title: "Seamless IoT stack",
-    body: "Wearable data can pair with cameras, edge devices, viHUB, and response channels for a single operating picture.",
-    img: image.iot,
+    title: "Seamless IoT Integration",
+    body: "Designed to integrate effortlessly with other IoT devices in the Smart Site Safety System, the watch enhances situational awareness, streamlines workflows, and boosts overall operational efficiency.",
+    img: image.feature3,
+    imageFirst: false,
   },
   {
-    title: "Rugged field design",
-    body: "The watch is shaped for long shifts, harsh sites, fast escalation, and easy adoption by crews.",
-    img: image.rugged,
+    title: "Rugged Durability with Sleek Design",
+    body: "Built to endure harsh environments, the Smart Watch combines a robust, rugged design with a sleek, modern aesthetic, ensuring it's as functional as it is stylish.",
+    img: image.feature4,
+    imageFirst: true,
   },
   {
-    title: "Extended battery life",
-    body: "Designed for shift-length reliability, fewer charging interruptions, and more dependable coverage.",
-    img: image.battery,
+    title: "Extended Battery Life",
+    body: "With advanced battery technology, the Smart Watch delivers long-lasting performance, ensuring reliability for extended shifts in demanding work environments.",
+    img: image.feature5,
+    imageFirst: false,
   },
 ];
 
@@ -215,54 +248,54 @@ const useCases = [
   {
     label: "Work Safety Monitoring",
     title: "Worker Safety Monitoring",
-    body: "Detect signs of fatigue, distress, falls, heat stress, and zone risk, then notify supervisors with location context.",
+    body: "Detects signs of fatigue or distress among construction and industrial workers and alerts supervisors, helping prevent accidents and ensuring a safer workplace.",
   },
   {
     label: "Real-Time Health Tracking",
-    title: "Live Health Signals",
-    body: "Track heart rate, temperature, SpO2, movement, and status trends so EHS teams can act on changing conditions.",
+    title: "Real-Time Health Tracking",
+    body: "Tracks health metrics throughout the shift so supervisors can react to early warning signs and keep workers protected.",
   },
   {
     label: "Emergency Response Coordination",
-    title: "Faster Response Coordination",
-    body: "Manual SOS and automatic escalation help responders locate workers and triage incidents without waiting for radio check-ins.",
+    title: "Emergency Response Coordination",
+    body: "Connects SOS alerts, worker status, and location context to speed up response during critical site events.",
   },
   {
     label: "Regulatory Compliance and Reporting",
-    title: "Compliance-Ready Logs",
-    body: "Site teams can review timestamped alerts, worker status, and incident histories for safety audits and trend reporting.",
+    title: "Regulatory Compliance and Reporting",
+    body: "Keeps safety events, alerts, and worker status visible for operational reviews and compliance reporting.",
   },
   {
     label: "Remote Monitoring for Supervisors",
-    title: "Remote Monitoring",
-    body: "Supervisors get site-wide visibility across remote, confined, underground, and low-connectivity environments.",
+    title: "Remote Monitoring for Supervisors",
+    body: "Gives supervisors a practical way to monitor distributed, remote, and high-risk workforces from a central view.",
   },
 ];
 
 const industries = [
   {
     title: "Construction",
-    body: "Real-time alerts, fall detection, and worker visibility for high-risk capital works and active sites.",
+    body: "Delivers real-time safety alerts and seamless communication to reduce incident response times and improve on-site safety.",
     icon: "https://static.wixstatic.com/media/a550d3_060639cddd1f47399019c4e4d3b3a9ea~mv2.png/v1/fill/w_130,h_126,al_c,lg_1,q_85,enc_avif,quality_auto/suppor.png",
   },
   {
     title: "Manufacturing",
-    body: "Fatigue, ergonomics, and distress monitoring for crews working long production shifts.",
+    body: "Continuously monitors worker health, detecting fatigue or distress early to minimize workplace accidents and improve well-being.",
     icon: "https://static.wixstatic.com/media/a550d3_9605498c9dc44e8e8df3af9598267e82~mv2.png/v1/fill/w_164,h_150,al_c,lg_1,q_85,enc_avif,quality_auto/working-factory.png",
   },
   {
     title: "Oil and Gas",
-    body: "Worker status and SOS visibility for isolated, confined, offshore, and hazardous zones.",
+    body: "Ensures safety in high-risk environments with health monitoring and immediate alerts, allowing for prompt action to prevent accidents.",
     icon: "https://static.wixstatic.com/media/a550d3_32d88010ed6444a9bb1a9ebcc8273f46~mv2.png/v1/fill/w_148,h_150,al_c,lg_1,q_85,enc_avif,quality_auto/oil-bottle.png",
   },
   {
     title: "Mining",
-    body: "Motionless-worker, heat, impact, and location alerts for underground and remote operations.",
+    body: "Provides instant hazard alerts and communication tools to keep miners connected and informed in real-time, enhancing safety protocols.",
     icon: "https://static.wixstatic.com/media/a550d3_e5b29d095d00405a8be683126702bdc6~mv2.png/v1/fill/w_164,h_150,al_c,lg_1,q_85,enc_avif,quality_auto/pickaxe.png",
   },
   {
     title: "Logistics",
-    body: "Team coordination and wellbeing tracking across warehouses, yards, and transport operations.",
+    body: "Enhances team coordination with instant messaging and alerts, boosting operational efficiency in warehouses and during transport operations.",
     icon: "https://static.wixstatic.com/media/d8b625_1ce1ec7496ab41a7877cbd17b041a309~mv2.png/v1/fill/w_119,h_115,al_c,lg_1,q_85,enc_avif,quality_auto/logistic-icon.png",
   },
 ];
@@ -271,27 +304,27 @@ const reviews = [
   [
     "Project Manager",
     "Construction Firm",
-    "The watch changed how quickly we spot site hazards and contact workers who may need help.",
-  ],
-  [
-    "Operations Director",
-    "Logistics Company",
-    "Rolling this across shifts gave us practical alerts without adding more manual check-ins.",
+    "The Smart Watch has transformed our safety protocols. It alerts us to potential hazards before they happen, making our team feel much safer on site!",
   ],
   [
     "Safety Coordinator",
     "Manufacturing Plant",
-    "Predictive alerts helped our team move from reactive safety meetings to earlier intervention.",
-  ],
-  [
-    "Safety Officer",
-    "Industrial Operations",
-    "A live view of worker health and location makes supervisor decisions much faster.",
+    "The AI features are impressive! The predictive alerts have helped us prevent accidents and improve overall site safety in real time.",
   ],
   [
     "Field Engineer",
     "Energy Sector",
-    "The watch is easy to wear and useful without becoming another distraction on site.",
+    "I love how user-friendly the Smart Watch is! It keeps me connected without being distracting, and the health tracking features give me peace of mind.",
+  ],
+  [
+    "Operations Director",
+    "Logistics Company",
+    "We implemented the Smart Watch across our workforce, and the feedback has been overwhelmingly positive. It's a game-changer for worker safety!",
+  ],
+  [
+    "Safety Officer",
+    "Industrial Operations",
+    "The ability to monitor my team's health and safety in real-time has been invaluable. The insights from the Smart Watch help me make informed decisions quickly.",
   ],
 ];
 
@@ -446,18 +479,26 @@ export function SmartWatchClone() {
       <section className="overview section-pad" id="overview">
         <div className="section-title">
           <span>Overview</span>
-          <h2>Key features of the viAct Smart Watch</h2>
+          <h2>Key Features of the viAct Smart Watch</h2>
         </div>
         <div className="overview-grid">
-          {overviewCards.map((card, index) => (
-            <article
-              className={index === 0 ? "overview-card wide" : "overview-card"}
-              key={card.title}
-            >
-              <img src={card.img} alt="" />
-              <div>
+          <article className="overview-card overview-card-wide">
+            <img className="overview-card-bg" src={overviewLead.img} alt="" />
+            <div className="overview-card-copy">
+              <h3>{overviewLead.title}</h3>
+              <p>{overviewLead.body}</p>
+            </div>
+          </article>
+          {overviewTiles.map((card) => (
+            <article className="overview-card" key={card.title}>
+              <img className="overview-card-bg" src={card.img} alt="" />
+              <div className="overview-card-copy">
                 <h3>{card.title}</h3>
-                <p>{card.body}</p>
+                <ul>
+                  {card.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
               </div>
             </article>
           ))}
@@ -465,74 +506,67 @@ export function SmartWatchClone() {
         <Button href="https://www.viact.ai/demo">Get Started Now</Button>
       </section>
 
-      <section className="features section-pad">
-        <div className="section-title compact">
-          <span>Unique Features</span>
-          <h2>Built for safety teams that need live field signals</h2>
-        </div>
-        <div className="feature-list">
-          {featureTiles.map((feature, index) => (
-            <article className="feature-row" key={feature.title}>
-              <div className="feature-number">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <div>
+      <section className="features section-pad" id="features">
+        <h2>Unique Features</h2>
+        <div className="feature-stack">
+          {featureRows.map((feature) => (
+            <article
+              className={`feature-showcase ${
+                feature.imageFirst ? "image-first" : ""
+              }`}
+              key={feature.title}
+            >
+              <div className="feature-copy">
                 <h3>{feature.title}</h3>
                 <p>{feature.body}</p>
               </div>
-              <img src={feature.img} alt="" />
+              <img
+                className="feature-media"
+                src={feature.img}
+                alt={`${feature.title} smart watch interface`}
+              />
             </article>
           ))}
         </div>
         <Button href="https://www.viact.ai/demo">Try Now</Button>
       </section>
 
-      <section className="use-cases section-pad">
-        <div className="section-title compact">
-          <span>Use Cases</span>
-          <h2>One wearable, many safety workflows</h2>
-        </div>
-        <div
-          className="case-tabs"
-          role="tablist"
-          aria-label="Smart watch use cases"
-        >
-          {useCases.map((item, index) => (
-            <button
-              aria-selected={selectedCase === index}
-              className={selectedCase === index ? "active" : ""}
-              key={item.label}
-              onClick={() => setSelectedCase(index)}
-              role="tab"
-              type="button"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-        <article className="case-panel">
-          <img
-            src={image.useCase}
-            alt="Worker monitoring dashboard shown with smart watch"
-          />
-          <div>
-            <h3>{currentCase.title}</h3>
-            <p>{currentCase.body}</p>
-            <div className="case-metrics">
-              <span>Vitals</span>
-              <span>Location</span>
-              <span>SOS</span>
-              <span>Reports</span>
-            </div>
+      <section className="use-cases section-pad" id="use-cases">
+        <h2>Use Cases</h2>
+        <div className="case-layout">
+          <div
+            className="case-tabs"
+            role="tablist"
+            aria-label="Smart watch use cases"
+          >
+            {useCases.map((item, index) => (
+              <button
+                aria-selected={selectedCase === index}
+                className={selectedCase === index ? "active" : ""}
+                key={item.label}
+                onClick={() => setSelectedCase(index)}
+                role="tab"
+                type="button"
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
-        </article>
+          <article className="case-panel">
+            <img
+              src={image.useCase}
+              alt="Worker safety monitoring use case"
+            />
+            <div className="case-overlay">
+              <h3>{currentCase.title}</h3>
+              <p>{currentCase.body}</p>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section className="industries section-pad">
-        <div className="section-title compact">
-          <span>Industries</span>
-          <h2>Designed for harsh, distributed work sites</h2>
-        </div>
+      <section className="industries section-pad" id="industries">
+        <h2>Industries</h2>
         <div className="industry-grid">
           {industries.map((industry) => (
             <article className="industry-card" key={industry.title}>
@@ -544,24 +578,28 @@ export function SmartWatchClone() {
         </div>
       </section>
 
-      <section className="reviews section-pad">
-        <div className="reviews-head">
-          <img src={image.testimonial} alt="" />
-          <div>
-            <span>Reviews</span>
-            <h2>What people say about us</h2>
+      <section className="reviews section-pad" id="reviews">
+        <div className="reviews-shell">
+          <div className="reviews-badge">Reviews</div>
+          <h2>What do people say about us?</h2>
+          <img className="reviews-arrow" src={image.reviewArrow} alt="" />
+          <div className="review-grid">
+            {reviews.map(([role, company, quote]) => (
+              <article className="review-card" key={`${role}-${company}`}>
+                <div className="quote-mark" aria-hidden>
+                  &quot;
+                </div>
+                <p>{quote}</p>
+                <div className="review-author">
+                  <img src={image.avatar} alt="" />
+                  <div>
+                    <strong>{role}</strong>
+                    <span>{company}</span>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
-        </div>
-        <div className="review-grid">
-          {reviews.map(([role, company, quote]) => (
-            <article className="review-card" key={`${role}-${company}`}>
-              <p>{quote}</p>
-              <div>
-                <strong>{role}</strong>
-                <span>{company}</span>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 

@@ -31,13 +31,64 @@ const expectedUseCases = [
   "Remote Monitoring for Supervisors",
 ];
 
+const expectedOverviewCopy = [
+  "More Than a Wearable",
+  "A cutting-edge tool designed to enhance safety and productivity in demanding work environments.",
+  "Advanced AI Capabilities",
+  "Delivers real-time health monitoring.",
+  "Robust IoT Integration",
+  "Ensures uninterrupted communication across teams.",
+  "Versatile Applications",
+  "Empowering the Workforce",
+];
+
+const expectedFeatureCopy = [
+  "AI-Enhanced Monitoring",
+  "The viAct Smart Watch leverages proprietary computer vision AI to provide real-time health and safety monitoring.",
+  "Customizable Alerts",
+  "Tailor notifications to specific needs, such as health metrics or safety warnings.",
+  "Seamless IoT Integration",
+  "Designed to integrate effortlessly with other IoT devices in the Smart Site Safety System",
+  "Rugged Durability with Sleek Design",
+  "Extended Battery Life",
+];
+
+const expectedIndustryCopy = [
+  "Delivers real-time safety alerts and seamless communication to reduce incident response times and improve on-site safety.",
+  "Continuously monitors worker health, detecting fatigue or distress early to minimize workplace accidents and improve well-being.",
+  "Ensures safety in high-risk environments with health monitoring and immediate alerts, allowing for prompt action to prevent accidents.",
+  "Provides instant hazard alerts and communication tools to keep miners connected and informed in real-time, enhancing safety protocols.",
+  "Enhances team coordination with instant messaging and alerts, boosting operational efficiency in warehouses and during transport operations.",
+];
+
+const expectedReviewCopy = [
+  "What do people say about us?",
+  "The Smart Watch has transformed our safety protocols. It alerts us to potential hazards before they happen, making our team feel much safer on site!",
+  "The AI features are impressive! The predictive alerts have helped us prevent accidents and improve overall site safety in real time.",
+  "I love how user-friendly the Smart Watch is! It keeps me connected without being distracting, and the health tracking features give me peace of mind.",
+  "We implemented the Smart Watch across our workforce, and the feedback has been overwhelmingly positive. It's a game-changer for worker safety!",
+  "The ability to monitor my team's health and safety in real-time has been invaluable.",
+];
+
 test("matches the original smart watch FAQ set", () => {
   for (const faq of expectedFaqs) {
     assert.match(source, new RegExp(escapeRegExp(faq)));
   }
 });
 
-test("keeps the original use-case tab labels and demo destinations", () => {
+test("keeps screenshot-visible smart watch section copy", () => {
+  for (const phrase of [
+    ...expectedOverviewCopy,
+    ...expectedFeatureCopy,
+    ...expectedUseCases,
+    ...expectedIndustryCopy,
+    ...expectedReviewCopy,
+  ]) {
+    assert.match(source, new RegExp(escapeRegExp(phrase)));
+  }
+});
+
+test("keeps demo destinations", () => {
   for (const useCase of expectedUseCases) {
     assert.match(source, new RegExp(escapeRegExp(useCase)));
   }
