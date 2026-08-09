@@ -174,11 +174,6 @@ export function SmartWatchClone() {
           <p>{hero.body}</p>
           <Button href="#overview">Explore CoreSense</Button>
         </div>
-        <MediaFrame
-          className="hero-product"
-          media={coreSenseImages.productVideo}
-          priority
-        />
       </section>
 
       <section className="overview section-pad" id="overview">

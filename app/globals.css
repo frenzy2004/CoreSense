@@ -326,35 +326,6 @@ video {
   line-height: 1.55;
 }
 
-.hero-product {
-  position: absolute;
-  right: max(-2rem, calc((100vw - 1500px) / 2));
-  bottom: 0;
-  z-index: 1;
-  width: min(750px, 54vw);
-  height: min(740px, calc(100% - 2rem));
-  background: transparent;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
-}
-
-.hero-product .media-element {
-  object-fit: cover;
-  mix-blend-mode: screen;
-}
-
-.hero-product .media-disclosure {
-  right: 1rem;
-  bottom: 1rem;
-}
-
-.hero-product .video-control {
-  top: auto;
-  right: 1rem;
-  bottom: 3.9rem;
-  left: auto;
-}
-
 .hero-bg-disclosure {
   right: auto;
   bottom: 1rem;
@@ -1094,11 +1065,6 @@ footer p {
     font-size: 4.35rem;
   }
 
-  .hero-product {
-    right: -5rem;
-    width: 58vw;
-  }
-
   .feature-showcase,
   .feature-showcase.image-first {
     gap: 3rem;
@@ -1127,11 +1093,6 @@ footer p {
 
   .hero h1 {
     font-size: 3.8rem;
-  }
-
-  .hero-product {
-    right: -7rem;
-    width: 64vw;
   }
 
   .overview-card-copy,
@@ -1212,18 +1173,6 @@ footer p {
     max-width: 470px;
     margin: 1.35rem 0 1.55rem;
     font-size: 1rem;
-  }
-
-  .hero-product {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: calc(100% + 2.3rem);
-    height: auto;
-    aspect-ratio: 16 / 10;
-    margin: 2.2rem -1.15rem 0;
-    -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 78%, transparent 100%);
-    mask-image: linear-gradient(0deg, #000 0%, #000 78%, transparent 100%);
   }
 
   .hero-bg-disclosure {

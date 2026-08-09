@@ -161,6 +161,10 @@ test("keeps a logo-only header", () => {
   assert.doesNotMatch(appSource, /aria-label="Toggle navigation"/);
 });
 
+test("does not layer a separate product watch over the hero", () => {
+  assert.doesNotMatch(appSource, /className="hero-product"/);
+});
+
 test("keeps new visible copy free of em dashes", () => {
   assert.doesNotMatch(allPageSource, /\u2014/);
 });
