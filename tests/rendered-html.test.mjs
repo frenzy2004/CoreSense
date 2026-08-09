@@ -12,15 +12,25 @@ const vercelConfig = JSON.parse(
 
 const expectedFaqs = [
   "How is an Industrial Smart Watch different from a normal fitness tracker?",
+  "A fitness tracker counts steps and sleep. viAct IoT Safety Watch monitors worker health, location, movement, and environment in real time - detecting fatigue, falls, distress, and triggering alerts.",
   "What does an industrial IoT smart watch actually monitor in real time?",
+  "It monitors seven categories: heart rate (BPM), body temperature for heat stress, blood oxygen (SpO2 for confined spaces), movement and posture for falls or motionless states",
   "How does safety monitoring with viAct IoT smart watch work end-to-end?",
+  "Three stages: Capture - sensors collect vitals, movement, and location, and can keep working offline.",
   "Can viAct IoT smart watch detect worker fatigue?",
+  "Yes. Fatigue is a major risk, with 50% of workers reporting fatigue.",
   "How does a smart safety watch detect fall events and worker distress?",
+  "Fall detection uses the accelerometer and gyroscope to detect sudden impact and a motionless state",
   "Which industries benefit most from an IoT Safety Watch integration?",
+  "Construction benefits from fall, heat stress, and fatigue detection and supports Hong Kong 4S requirements",
   "How does viAct Industrial Smart Watch detect and help prevent workplace heat stress?",
+  "It continuously monitors skin temperature, heart rate, and SpO2, cross-referenced with weather station ambient data.",
   "How does the Smart Watch protect lone workers in remote, confined, underground, or isolated environments with low connectivity?",
+  "It combines real-time location tracking with GPS and indoor positioning, motionless worker detection, fall and impact detection",
   "How much does viAct's Smart Watch cost, and is it available on subscription?",
+  "There is no fixed public price. Cost depends on number of devices, AI modules, connectivity, deployment model, and contract duration.",
   "How does viAct's Smart Watch protect worker privacy while monitoring health data?",
+  "Data is classified as safety and operational data, not surveillance.",
 ];
 
 const expectedUseCases = [
@@ -32,6 +42,11 @@ const expectedUseCases = [
 ];
 
 const expectedOverviewCopy = [
+  "Revolutionize Workplace Safety with the Smartest Watch Yet",
+  "Experience the Perfect Fusion of AI and IoT for Unparalleled",
+  "Forbes Asia 100 to Watch 2022",
+  "Leading PropTech 50 China Region",
+  "4S Smart Site Safety System",
   "More Than a Wearable",
   "A cutting-edge tool designed to enhance safety and productivity in demanding work environments.",
   "Advanced AI Capabilities",
@@ -70,6 +85,17 @@ const expectedReviewCopy = [
   "The ability to monitor my team's health and safety in real-time has been invaluable.",
 ];
 
+const expectedFooterCopy = [
+  "Empower your team—wearable AI that watches your back in real time",
+  "Request A Demo",
+  "Talk To Sales",
+  "AI Monitoring That Redefines Workplace Safety",
+  "Work at Height Safety",
+  "Digital Works Supervision System",
+  "Copyright © 2026 | All Rights Reserved",
+  "Terms Of Service",
+];
+
 test("matches the original smart watch FAQ set", () => {
   for (const faq of expectedFaqs) {
     assert.match(source, new RegExp(escapeRegExp(faq)));
@@ -83,6 +109,7 @@ test("keeps screenshot-visible smart watch section copy", () => {
     ...expectedUseCases,
     ...expectedIndustryCopy,
     ...expectedReviewCopy,
+    ...expectedFooterCopy,
   ]) {
     assert.match(source, new RegExp(escapeRegExp(phrase)));
   }

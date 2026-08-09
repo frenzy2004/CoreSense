@@ -7,7 +7,7 @@ const image = {
   logo:
     "https://static.wixstatic.com/media/72edbb_eba6157c991949428a05d325a2eec20b~mv2.png/v1/fill/w_180,h_72,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20H%20-%20white.png",
   heroWorker:
-    "https://static.wixstatic.com/media/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg/v1/fill/w_147,h_97,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg",
+    "https://static.wixstatic.com/media/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg/v1/fill/w_980,h_847,al_c,q_90,enc_avif,quality_auto/d8b625_7d7ae0a4cc3041cd8e774a3af1371918~mv2.jpg",
   watch:
     "https://static.wixstatic.com/media/d8b625_56b9a7f882594b4ba58cb15b601a92b9~mv2.png/v1/crop/x_0,y_0,w_535,h_806/fill/w_535,h_805,al_c,q_90,enc_avif,quality_auto/sw-item.png",
   overviewLead:
@@ -60,6 +60,10 @@ const awards = [
     src: "https://static.wixstatic.com/media/a550d3_e775d313df5a46d4806b07a8fb0bf51b~mv2.png/v1/fill/w_276,h_122,al_c,lg_1,q_85,enc_avif,quality_auto/Austria%E2%80%99s%20josef%20umdasch%20research%20prize%202022.png",
   },
   {
+    alt: "Leading PropTech 50 China Region",
+    src: "https://static.wixstatic.com/media/a550d3_5c8d477dbc644f5eaf4824deee769197~mv2.png/v1/fill/w_321,h_139,al_c,lg_1,q_85,enc_avif,quality_auto/Leading%20PropTech%2050(China%20Region).png",
+  },
+  {
     alt: "CEMEX Ventures Top 50 ConTech Startups",
     src: "https://static.wixstatic.com/media/a550d3_5e321b6d7dd141d681597dc44200e7c9~mv2.png/v1/fill/w_284,h_126,al_c,lg_1,q_85,enc_avif,quality_auto/Top50%20ConTech%20Startups%202020%20by%20CEMEX%20Ventures.png",
   },
@@ -70,6 +74,14 @@ const awards = [
   {
     alt: "Construction Innovation and Technology Fund",
     src: "https://static.wixstatic.com/media/d8b625_2f87a12a66be4711b5c11cc4c0dd4056~mv2.png/v1/fill/w_316,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo-CITF.png",
+  },
+  {
+    alt: "viAct 4S",
+    src: "https://static.wixstatic.com/media/d8b625_42cbbc362903483abc667f3e50cef43e~mv2.png/v1/fill/w_352,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo-viact-4s.png",
+  },
+  {
+    alt: "4S Smart Site Safety System",
+    src: "https://static.wixstatic.com/media/d8b625_0bcec211a80342d09448dde3b0484f9a~mv2.png/v1/fill/w_316,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo-4s.png",
   },
 ];
 
@@ -171,6 +183,63 @@ const linkMap: Record<string, string> = {
 };
 
 const hrefFor = (label: string) => linkMap[label] ?? "https://www.viact.ai";
+
+const footerHref = (label: string) => {
+  const footerMap: Record<string, string> = {
+    "Logistics and Supply Chain":
+      "https://www.viact.ai/industry/logistics-supply-chain-ai-safety-solution",
+    Warehouse: "https://www.viact.ai/industry/warehouse-ai-safety-solution",
+    "Oil & Gas": "https://www.viact.ai/industry/oil-and-gas-ai-safety-solution",
+    "Facility Management":
+      "https://www.viact.ai/industry/facility-management-ai-safety-solution",
+    "Smart Cities": "https://www.viact.ai/industry/smart-city-ai-safety-solution",
+    "Govt & Public Sector":
+      "https://www.viact.ai/industry/government-public-sector-ai-safety-solution",
+    "Video Analytics Solution": "https://www.viact.ai/video-analytics-solution",
+    "Permit to Work System": "https://www.viact.ai/permit-to-work-software",
+    "Generative AI Solutions": "https://www.viact.ai/generative-ai-solutions",
+    "AI for Decarbonization": "https://www.viact.ai/ai-for-decarbonization",
+    "Red Zone Monitoring":
+      "https://www.viact.ai/video-analytics-solution/red-zone-monitoring",
+    "Project Control Center": "https://www.viact.ai/project-control-center",
+    "Smart Site Safety System": "https://www.viact.ai/smart-site-safety-system",
+    "Environmental Monitoring":
+      "https://www.viact.ai/environmental-monitoring-system",
+    "PPE Detection":
+      "https://www.viact.ai/video-analytics-solution/ppe-detection",
+    "viLID - Lidar": "https://www.viact.ai/vilid",
+    "viHUB - Platform": "https://www.viact.ai/vihub",
+    "viHOI - Hoisting": "https://www.viact.ai/vihoi",
+    "viMAC - Machinery": "https://www.viact.ai/vimac",
+    "viBOT - Robotic": "https://www.viact.ai/vibot",
+    "CCTV - AI Modules": "https://www.viact.ai/aimodules",
+    "Danger Zone Detection":
+      "https://www.viact.ai/video-analytics-solution/danger-zone-detection",
+    "Fleet Management": "https://www.viact.ai/fleet-management-system",
+    "Confined Space":
+      "https://www.viact.ai/video-analytics-solution/confined-space-monitoring",
+    IOT: "https://www.viact.ai/iot",
+    "Work at Height Safety": "https://www.viact.ai/iot/work-at-height-safety",
+    "Digital Works Supervision System":
+      "https://www.viact.ai/iot/digital-works-supervision-system",
+    "Smart Lock": "https://www.viact.ai/iot/smart-lock",
+    "Weather Station": "https://www.viact.ai/iot/weather-station",
+    "Gas Leak Detector": "https://www.viact.ai/iot/gas-leak-detector",
+    "Fleet Tracking System": "https://www.viact.ai/iot/fleet-tracking-system",
+    "Access Control System": "https://www.viact.ai/iot/access-control-system",
+    Collaterals: "https://www.viact.ai/collaterals",
+    "Beyond VISION": "https://www.viact.ai/beyond-vision",
+    "Contact Us": "https://www.viact.ai/contactus",
+    News: "https://www.viact.ai/news",
+    Career: "https://www.viact.ai/career",
+    Events: "https://www.viact.ai/events",
+    Sitemap: "https://www.viact.ai/sitemap",
+    "Terms Of Service": "https://www.viact.ai/terms-of-service",
+    "Privacy Policy": "https://www.viact.ai/privacy-policy",
+  };
+
+  return footerMap[label] ?? linkMap[label] ?? "https://www.viact.ai";
+};
 
 const overviewLead = {
   title: "More Than a Wearable",
@@ -307,69 +376,147 @@ const reviews = [
     "The Smart Watch has transformed our safety protocols. It alerts us to potential hazards before they happen, making our team feel much safer on site!",
   ],
   [
-    "Safety Coordinator",
-    "Manufacturing Plant",
-    "The AI features are impressive! The predictive alerts have helped us prevent accidents and improve overall site safety in real time.",
-  ],
-  [
-    "Field Engineer",
-    "Energy Sector",
-    "I love how user-friendly the Smart Watch is! It keeps me connected without being distracting, and the health tracking features give me peace of mind.",
-  ],
-  [
     "Operations Director",
     "Logistics Company",
     "We implemented the Smart Watch across our workforce, and the feedback has been overwhelmingly positive. It's a game-changer for worker safety!",
+  ],
+  [
+    "Safety Coordinator",
+    "Manufacturing Plant",
+    "The AI features are impressive! The predictive alerts have helped us prevent accidents and improve overall site safety in real time.",
   ],
   [
     "Safety Officer",
     "Industrial Operations",
     "The ability to monitor my team's health and safety in real-time has been invaluable. The insights from the Smart Watch help me make informed decisions quickly.",
   ],
+  [
+    "Field Engineer",
+    "Energy Sector",
+    "I love how user-friendly the Smart Watch is! It keeps me connected without being distracting, and the health tracking features give me peace of mind.",
+  ],
 ];
 
 const faqs = [
   [
     "How is an Industrial Smart Watch different from a normal fitness tracker?",
-    "A workplace safety watch is built for incident prevention. It combines health signals, motion, location, alerts, and site-system integration rather than passively counting activity.",
+    "A fitness tracker counts steps and sleep. viAct IoT Safety Watch monitors worker health, location, movement, and environment in real time - detecting fatigue, falls, distress, and triggering alerts. It integrates with site safety systems. Sites report 90% reduction in safety breaches when deployed alongside AI video analytics.",
   ],
   [
     "What does an industrial IoT smart watch actually monitor in real time?",
-    "It can track heart rate, body temperature, SpO2, movement, posture, location, fatigue indicators, and SOS events, then surface actionable alerts in the safety platform.",
+    "It monitors seven categories: heart rate (BPM), body temperature for heat stress, blood oxygen (SpO2 for confined spaces), movement and posture for falls or motionless states, real-time GPS location, fatigue indicators from biometric trend analysis, and SOS signals, manual and automatic. All data streams to viHUB for AI analytics and safety alerts.",
   ],
   [
     "How does safety monitoring with viAct IoT smart watch work end-to-end?",
-    "The watch captures worker-level data, AI evaluates the signal at the edge or in the cloud, and viHUB gives supervisors alerts, records, and response context.",
+    "Three stages: Capture - sensors collect vitals, movement, and location, and can keep working offline. Process - AI analyses against thresholds; viMOV enables offline edge processing. Deployment can be cloud, on-prem, or hybrid. Monitor and Respond - alerts, health records, and SOS events surface in viHUB for real-time response and compliance reports.",
   ],
   [
     "Can viAct IoT smart watch detect worker fatigue?",
-    "Yes. Biometric trends, motion signals, and configurable thresholds can flag fatigue risk so supervisors can intervene earlier during long or high-risk shifts.",
+    "Yes. Fatigue is a major risk, with 50% of workers reporting fatigue. The watch combines biometric analysis, heart rate variability, movement, skin temperature, working hours, and shift data to establish personal baselines. It flags early-stage fatigue before impairment, and viHUB generates custom fatigue trend reports per worker, shift, zone, or task.",
   ],
   [
     "How does a smart safety watch detect fall events and worker distress?",
-    "Motion sensors, posture changes, motionless-worker detection, critical vitals, and manual or automatic SOS can trigger alerts for falls, distress, and non-response events.",
+    "Fall detection uses the accelerometer and gyroscope to detect sudden impact and a motionless state, then sends an automatic alert to supervisors through viHUB with live GPS location. The worker can confirm condition; no response escalates as an emergency. Manual SOS works through a one-click button, while auto SOS can trigger on fall, no response, or critical biometrics.",
   ],
   [
     "Which industries benefit most from an IoT Safety Watch integration?",
-    "Construction, oil and gas, mining, manufacturing, and logistics benefit most because workers often operate in zones where supervisors cannot continuously see them.",
+    "Construction benefits from fall, heat stress, and fatigue detection and supports Hong Kong 4S requirements for contracts over HK$30M. Oil and gas uses it for lone worker monitoring, SpO2 in low oxygen, and auto SOS. Mining uses underground tracking, motionless detection, heat, and exertion monitoring. Manufacturing and logistics use it for ergonomic risk, fatigue management, heat stress, wellbeing, and emergency coordination.",
   ],
   [
     "How does viAct Industrial Smart Watch detect and help prevent workplace heat stress?",
-    "Skin temperature, heart rate, SpO2, and weather-station context can trigger early warnings so workers and supervisors can intervene before collapse or impairment.",
+    "It continuously monitors skin temperature, heart rate, and SpO2, cross-referenced with weather station ambient data. Early-stage heat stress triggers a haptic alert to the worker and a notification to the supervisor through viHUB. It logs each event with timestamped biometric data to support compliance with UAE MoHRE midday work ban, Saudi MHRSD, Singapore MOM WSH Act, and Hong Kong 4S requirements.",
   ],
   [
     "How does the Smart Watch protect lone workers in remote, confined, underground, or isolated environments with low connectivity?",
-    "Location tracking, motionless-worker detection, fall detection, SOS escalation, and edge processing support workers in remote, confined, underground, or low-connectivity zones.",
+    "It combines real-time location tracking with GPS and indoor positioning, motionless worker detection, fall and impact detection, auto SOS escalation, hands-free communication, offline monitoring through viMOV edge processing, and gas leak detector integration. That enables emergency response even when a worker cannot call for help.",
   ],
   [
     "How much does viAct's Smart Watch cost, and is it available on subscription?",
-    "Pricing depends on device count, activated modules, connectivity, deployment model, and contract length. The original page directs commercial questions to sales or a demo.",
+    "There is no fixed public price. Cost depends on number of devices, AI modules, connectivity, deployment model, and contract duration. Subscription SaaS is available as a per-device monthly or annual license with platform access, updates, AI modules, and the viHUB dashboard. Site-specific quotes and demos come from sales.",
   ],
   [
     "How does viAct's Smart Watch protect worker privacy while monitoring health data?",
-    "The system treats biometric data as safety and operational data, uses role-based access, encrypts data in transit and at rest, and supports on-premises deployment where required.",
+    "Data is classified as safety and operational data, not surveillance. Only authorised EHS teams and supervisors can access individual data through role-based controls. Data is encrypted in transit and at rest, and access is logged for audit. The system supports GDPR, PDPA in Singapore, PDPL in Saudi Arabia and the GCC, and on-prem deployment to keep data on-site.",
   ],
 ];
+
+const socialLinks = [
+  ["LinkedIn", "https://www.linkedin.com/company/viactai/"],
+  ["Facebook", "https://www.facebook.com/viactai"],
+  ["Instagram", "https://www.instagram.com/viactai/"],
+  ["YouTube", "https://www.youtube.com/@viactai"],
+  ["X", "https://twitter.com/aiviact"],
+  ["Medium", "https://viact.medium.com/"],
+];
+
+const footerColumns = [
+  [
+    "INDUSTRIES",
+    [
+      "Manufacturing",
+      "Construction",
+      "Logistics and Supply Chain",
+      "Warehouse",
+      "Oil & Gas",
+      "Mining",
+      "Food & Beverage",
+      "Automotive & EV",
+      "Facility Management",
+      "Smart Cities",
+      "Govt & Public Sector",
+    ],
+  ],
+  [
+    "SOLUTIONS",
+    [
+      "Video Analytics Solution",
+      "Permit to Work System",
+      "Generative AI Solutions",
+      "AI for Decarbonization",
+      "Red Zone Monitoring",
+      "Project Control Center",
+      "Smart Site Safety System",
+      "Environmental Monitoring",
+      "PPE Detection",
+    ],
+  ],
+  [
+    "PRODUCTS",
+    [
+      "viLID - Lidar",
+      "viAER - Drone",
+      "viHUB - Platform",
+      "viMOV - Mobility",
+      "viHOI - Hoisting",
+      "viMAC - Machinery",
+      "viBOT - Robotic",
+      "CCTV - AI Modules",
+      "Danger Zone Detection",
+      "Fleet Management",
+      "Confined Space",
+    ],
+  ],
+  [
+    "IOT",
+    [
+      "IOT",
+      "Work at Height Safety",
+      "Digital Works Supervision System",
+      "Smart Lock",
+      "Smart Watch",
+      "Smart Helmet",
+      "Weather Station",
+      "Gas Leak Detector",
+      "Fleet Tracking System",
+      "Access Control System",
+    ],
+  ],
+  [
+    "RESOURCES",
+    ["Case Studies", "Guides", "Glossary", "Collaterals", "Blog", "Beyond VISION"],
+  ],
+  ["COMPANY", ["Contact Us", "News", "Career", "Events"]],
+] as const;
 
 function Button({
   href,
@@ -456,15 +603,23 @@ export function SmartWatchClone() {
       <section className="hero" id="top">
         <img className="hero-bg" src={image.heroWorker} alt="" aria-hidden />
         <div className="hero-copy">
-          <h1>Revolutionize workplace safety with the smartest watch yet</h1>
+          <h1 aria-label="Revolutionize Workplace Safety with the Smartest Watch Yet">
+            Revolutionize
+            <br />
+            Workplace Safety
+            <br />
+            with the Smartest
+            <br />
+            Watch Yet
+          </h1>
           <p>
-            AI and IoT worker monitoring for safer sites, faster response, and
-            better operational visibility.
+            Experience the Perfect Fusion of AI and IoT for Unparalleled
+            Safety, Efficiency, and Performance.
           </p>
-          <Button href="https://www.viact.ai/demo">Explore</Button>
+          <Button href="https://www.viact.ai/demo">EXPLORE</Button>
         </div>
         <div className="watch-stage" aria-label="Smart watch product preview">
-          <img src={image.watch} alt="AI-powered industrial smart watch" />
+          <img src={image.watch} alt="AI-powered Smartwatch for Workplace Safety" />
         </div>
       </section>
 
@@ -603,10 +758,9 @@ export function SmartWatchClone() {
         </div>
       </section>
 
-      <section className="faq section-pad">
+      <section className="faq section-pad" id="faq">
         <div className="section-title compact">
-          <span>FAQ</span>
-          <h2>Frequently asked questions</h2>
+          <h2>Frequently Asked Questions</h2>
         </div>
         <div className="faq-list">
           {faqs.map(([question, answer]) => (
@@ -618,21 +772,58 @@ export function SmartWatchClone() {
         </div>
       </section>
 
-      <section className="demo" id="demo">
-        <div>
-          <span>Ready for a site walkthrough?</span>
-          <h2>
-            Connect worker-level safety data to your AI-IoT operations stack.
-          </h2>
+      <section className="final-cta" id="demo">
+        <h2>Empower your team—wearable AI that watches your back in real time</h2>
+        <div className="final-cta-actions">
+          <Button href="https://www.viact.ai/demo">Request A Demo</Button>
+          <Button href="https://www.viact.ai/contactsales" variant="secondary">
+            Talk To Sales
+          </Button>
         </div>
-        <Button href="https://www.viact.ai/demo" variant="secondary">
-          Schedule Demo
-        </Button>
       </section>
 
-      <footer>
-        <img src={image.logo} alt="viAct" />
-        <p>AI-IoT worker safety for connected industrial sites.</p>
+      <footer className="site-footer">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <img src={image.logo} alt="viAct" />
+            <div className="social-links" aria-label="Social links">
+              {socialLinks.map(([label, href]) => (
+                <a href={href} key={label}>
+                  {label}
+                </a>
+              ))}
+            </div>
+            <a
+              className="footer-address"
+              href="https://maps.app.goo.gl/GE6JisZtbswDAhJd9"
+            >
+              26/F, 238 Des Voeux Road Central, Sheung Wan, Hong Kong
+            </a>
+          </div>
+          <h2>AI Monitoring That Redefines Workplace Safety</h2>
+        </div>
+        <div className="footer-columns">
+          {footerColumns.map(([heading, links]) => (
+            <div className="footer-column" key={heading}>
+              <h3>{heading}</h3>
+              {links.map((label) => (
+                <a href={footerHref(label)} key={label}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="footer-bottom">
+          <p>Copyright © 2026 | All Rights Reserved</p>
+          <div>
+            {["Sitemap", "Terms Of Service", "Privacy Policy"].map((label) => (
+              <a href={footerHref(label)} key={label}>
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
       </footer>
     </main>
   );
