@@ -1,0 +1,63 @@
+name: Bug report
+description: Report a reproducible CoreSense site or document-viewer problem.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for documenting the problem. Do not include credentials or sensitive worker information.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the observed and expected behavior.
+      placeholder: Include the page section and what you expected to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Give the shortest reliable sequence that reproduces the issue.
+      placeholder: |
+        1. Open...
+        2. Select...
+        3. Observe...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      options:
+        - Product page
+        - Document viewer
+        - Video or image media
+        - Responsive layout
+        - Build or test tooling
+        - Repository documentation
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and viewport
+      placeholder: Safari 19, 390 x 844
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Add screenshots, console errors, or links that help isolate the issue.
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I have removed credentials, private data, and real worker information.
+          required: true
