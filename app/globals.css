@@ -191,63 +191,6 @@ video {
   line-height: 1.25;
 }
 
-.video-control {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  z-index: 6;
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 50%;
-  color: #fff;
-  background: rgba(5, 5, 5, 0.76);
-  transition: background-color 150ms ease;
-}
-
-.video-control:hover {
-  background: #050505;
-}
-
-.video-control-icon {
-  position: relative;
-  display: block;
-  width: 14px;
-  height: 16px;
-}
-
-.video-control-icon.play::before {
-  position: absolute;
-  top: 1px;
-  left: 3px;
-  width: 0;
-  height: 0;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-left: 11px solid #fff;
-  content: "";
-}
-
-.video-control-icon.pause::before,
-.video-control-icon.pause::after {
-  position: absolute;
-  top: 1px;
-  width: 4px;
-  height: 14px;
-  background: #fff;
-  content: "";
-}
-
-.video-control-icon.pause::before {
-  left: 2px;
-}
-
-.video-control-icon.pause::after {
-  right: 2px;
-}
-
 .hero {
   position: relative;
   display: flex;
@@ -473,11 +416,6 @@ footer p {
 
 .overview-card li::marker {
   color: var(--accent);
-}
-
-.overview-card .video-control {
-  right: 0.75rem;
-  left: auto;
 }
 
 .features {

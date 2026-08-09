@@ -65,7 +65,6 @@ function MediaFrame({
   priority?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (media.kind !== "video" || !videoRef.current) return;
@@ -76,32 +75,16 @@ function MediaFrame({
     const syncPlayback = () => {
       if (reduceMotion.matches) {
         video.pause();
-        setIsPlaying(false);
         return;
       }
 
-      void video
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
+      void video.play().catch(() => undefined);
     };
 
     syncPlayback();
     reduceMotion.addEventListener("change", syncPlayback);
     return () => reduceMotion.removeEventListener("change", syncPlayback);
   }, [media.kind, media.src]);
-
-  const togglePlayback = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      void video.play().then(() => setIsPlaying(true));
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
-  };
 
   const style = {
     "--media-position": media.position ?? "center center",
@@ -110,32 +93,18 @@ function MediaFrame({
   return (
     <figure className={`media-frame ${className}`.trim()} style={style}>
       {media.kind === "video" ? (
-        <>
-          <video
-            ref={videoRef}
-            className="media-element"
-            loop
-            muted
-            playsInline
-            poster={media.poster}
-            preload={priority ? "auto" : "metadata"}
-            onPause={() => setIsPlaying(false)}
-            onPlay={() => setIsPlaying(true)}
-          >
-            <source src={media.src} type="video/mp4" />
-          </video>
-          <button
-            className="video-control"
-            type="button"
-            aria-label={isPlaying ? "Pause concept video" : "Play concept video"}
-            onClick={togglePlayback}
-          >
-            <span
-              aria-hidden
-              className={`video-control-icon ${isPlaying ? "pause" : "play"}`}
-            />
-          </button>
-        </>
+        <video
+          ref={videoRef}
+          autoPlay
+          className="media-element"
+          loop
+          muted
+          playsInline
+          poster={media.poster}
+          preload={priority ? "auto" : "metadata"}
+        >
+          <source src={media.src} type="video/mp4" />
+        </video>
       ) : (
         <img
           className="media-element"

@@ -140,13 +140,14 @@ test("references only existing local CoreSense media", async () => {
   }
 });
 
-test("uses the supplied CoreSense motion assets with accessible controls", () => {
+test("autoplays the supplied CoreSense motion assets without control overlays", () => {
   for (const assetPath of expectedCoreSenseVideos) {
     assert.match(allPageSource, new RegExp(escapeRegExp(assetPath)));
   }
   assert.match(appSource, /<video/);
+  assert.match(appSource, /autoPlay/);
   assert.match(appSource, /playsInline/);
-  assert.match(appSource, /aria-label=.*video/i);
+  assert.doesNotMatch(appSource, /video-control/);
   assert.match(appSource, /prefers-reduced-motion:\s*reduce/);
 });
 
