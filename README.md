@@ -1,100 +1,123 @@
-# vinext-starter
+# CoreSense
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+**Personal heat-risk intelligence at the edge.**
 
-## Prerequisites
+CoreSense is a worker-safety prototype that combines on-wrist sensing, site conditions, conservative decision rules, clear worker actions, supervisor escalation, and a reviewable event record.
 
-- Node.js `>=22.13.0`
+[View the live CoreSense experience](https://coresense.vercel.app)
 
-## Quick Start
+![CoreSense heat-risk worker experience](public/coresense/heat-construction.png)
+
+## The Product
+
+Heat strain can build before a worker or supervisor sees an obvious problem. CoreSense is designed to turn that uncertainty into one operational loop:
+
+```text
+Sense -> Estimate -> Decide -> Act -> Record
+```
+
+- **Sense:** collect worker and site signals without sending raw optical data off the band.
+- **Estimate:** derive a personal thermal-strain estimate using the documented Buller heart-rate-to-ECTemp model.
+- **Decide:** combine the estimate, signal quality, trend, and site WBGT through conservative rules.
+- **Act:** show a direct on-wrist instruction such as `BAND OK`, `CAUTION`, or `REST NOW`.
+- **Record:** preserve acknowledgements, escalations, recovery events, and important uncertainty for review.
+
+```mermaid
+flowchart LR
+    A["Worker signals"] --> B["On-band estimate"]
+    C["Site WBGT"] --> D["Conservative decision"]
+    B --> D
+    D --> E["Worker action"]
+    D --> F["Supervisor response"]
+    E --> G["Reviewable record"]
+    F --> G
+```
+
+## What Is Implemented
+
+- Responsive, media-rich CoreSense product experience
+- Local product imagery plus autoplaying, muted, looping scenario video
+- Five interactive use-case states with worker and supervisor outcomes
+- Evidence, architecture, privacy, verification, and limitation summaries
+- Searchable in-site reader for all 31 supplied Markdown documents
+- Mobile and desktop layouts with reduced-motion handling
+- Static production build configured for Vercel
+- Rendered-output tests for product content and removed legacy material
+
+## Evidence Boundary
+
+CoreSense is a safety decision-support prototype. It is not a clinical thermometer or medical device, and the current materials do not establish clinical accuracy, field effectiveness, assembled-device runtime, durability, or certification.
+
+The interface keeps those limits visible. It presents personal guidance as one input beside site WBGT, existing heat controls, trained supervision, and established emergency procedures.
+
+## Document Library
+
+The deployed site includes a searchable document reader backed by `public/docs`. Every source link opens inside the CoreSense experience, so architecture, science, validation, bill-of-materials, pilot, field-footage, and outreach documents can be reviewed without downloading the repository.
+
+The library is indexed in `app/docs-manifest.ts` and rendered by `app/DocumentLibrary.tsx` with GitHub-flavored Markdown support.
+
+## Technology
+
+- React 19
+- TypeScript
+- Vinext and Vite 8
+- `react-markdown` with `remark-gfm`
+- Node.js built-in test runner
+- Vercel static deployment
+
+## Local Development
+
+Requires Node.js `>=22.13.0`.
 
 ```bash
 npm install
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+Open the local URL printed by Vite.
 
-## Included Shape
+## Verification
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run lint
+npm test
+npm run vercel-build
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The test suite validates the rendered product sections, local media, document library, product metadata, removed control overlays, and CoreSense-only identity in the current source tree.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## Project Structure
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```text
+app/
+  SmartWatchClone.tsx    Main CoreSense experience
+  coresense-content.ts   Structured product and scenario content
+  DocumentLibrary.tsx    Embedded Markdown reader
+  docs-manifest.ts       Document index
+  globals.css            Responsive visual system
+public/
+  coresense/             Product images, previews, and video
+  docs/                  Embedded project documentation
+tests/
+  rendered-html.test.mjs Rendered-output regression coverage
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+## Deployment
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+The Vercel build uses `npm run vercel-build` and publishes `dist/vercel` as a static production output.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+```bash
+npx vercel deploy --prod
+```
 
-## Useful Commands
+Production: [coresense.vercel.app](https://coresense.vercel.app)
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Source Material
 
-## Learn More
+The product claims, decision boundaries, implementation notes, and known limitations shown on the site are derived from the versioned documents in `public/docs`. Start with:
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+- [`ONE-PAGE-SUMMARY.md`](public/docs/ONE-PAGE-SUMMARY.md)
+- [`architecture.md`](public/docs/architecture.md)
+- [`science.md`](public/docs/science.md)
+- [`WOKWI-VERIFICATION.md`](public/docs/WOKWI-VERIFICATION.md)
+- [`limitations.md`](public/docs/limitations.md)
