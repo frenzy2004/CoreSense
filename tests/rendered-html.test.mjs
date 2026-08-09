@@ -116,6 +116,12 @@ test("does not render the awards logo bar below the hero", () => {
   assert.doesNotMatch(source, /aria-label="Awards and recognition"/);
 });
 
+test("keeps only the viAct brand link in the header", () => {
+  assert.doesNotMatch(source, /aria-label="Main navigation"/);
+  assert.doesNotMatch(source, />Schedule Demo</);
+  assert.doesNotMatch(source, /aria-label="Toggle navigation"/);
+});
+
 test("keeps demo destinations", () => {
   for (const useCase of expectedUseCases) {
     assert.match(source, new RegExp(escapeRegExp(useCase)));
@@ -123,7 +129,7 @@ test("keeps demo destinations", () => {
 
   assert.equal(
     [...source.matchAll(/https:\/\/www\.viact\.ai\/demo/g)].length,
-    6,
+    4,
   );
 });
 

@@ -59,9 +59,8 @@ img {
   top: 0;
   z-index: 30;
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto;
   align-items: center;
-  gap: 2rem;
   min-height: var(--topbar-height);
   padding: 0 max(1rem, calc((100vw - 1530px) / 2));
   background: #050505;
@@ -80,77 +79,6 @@ footer img {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.desktop-nav {
-  display: flex;
-  justify-content: center;
-  gap: clamp(1.1rem, 2.3vw, 2.8rem);
-  height: 100%;
-}
-
-.nav-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 42px;
-}
-
-.nav-item > summary {
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.86);
-  padding: 0.5rem 0;
-  list-style: none;
-  cursor: pointer;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  transition: color 160ms ease;
-}
-
-.nav-item > summary::-webkit-details-marker {
-  display: none;
-}
-
-.nav-item > summary:hover,
-.nav-item[open] > summary {
-  color: #fff;
-}
-
-.mega-menu {
-  position: absolute;
-  top: calc(100% + 0.7rem);
-  left: 50%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(180px, 1fr));
-  gap: 1.2rem;
-  min-width: 460px;
-  padding: 1.2rem;
-  transform: translateX(-50%);
-  background: rgba(14, 14, 14, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
-}
-
-.mega-menu p {
-  margin: 0 0 0.65rem;
-  color: var(--accent);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.mega-menu a {
-  display: block;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.9rem;
-  line-height: 1.35;
-  padding: 0.28rem 0;
-  text-decoration: none;
-}
-
-.mega-menu a:hover {
-  color: #fff;
 }
 
 .button {
@@ -174,13 +102,6 @@ footer img {
     border-color 150ms ease;
 }
 
-.topbar > .button {
-  min-width: 192px;
-  min-height: 48px;
-  padding-inline: 1.2rem;
-  font-size: 1.08rem;
-}
-
 .button:active {
   transform: translateY(1px);
 }
@@ -200,11 +121,6 @@ footer img {
 
 .button-secondary:hover {
   background: rgba(255, 255, 255, 0.16);
-}
-
-.mobile-toggle,
-.mobile-menu {
-  display: none;
 }
 
 .hero {
@@ -933,55 +849,6 @@ footer p {
 }
 
 @media (max-width: 1180px) {
-  .topbar {
-    grid-template-columns: auto 1fr auto;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-
-  .mobile-toggle {
-    display: grid;
-    width: 44px;
-    height: 44px;
-    place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: var(--radius);
-    background: transparent;
-  }
-
-  .mobile-toggle span {
-    display: block;
-    width: 19px;
-    height: 2px;
-    background: #fff;
-  }
-
-  .mobile-menu {
-    position: sticky;
-    top: var(--topbar-height);
-    z-index: 29;
-    display: grid;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: #0a0a0a;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .mobile-menu summary {
-    color: #fff;
-    cursor: pointer;
-    padding: 0.75rem 0;
-  }
-
-  .mobile-menu a {
-    display: block;
-    color: rgba(255, 255, 255, 0.75);
-    padding: 0.45rem 0.4rem;
-    text-decoration: none;
-  }
-
   .hero {
     grid-template-columns: 1fr;
   }
@@ -1044,12 +911,7 @@ footer p {
 
 @media (max-width: 760px) {
   .topbar {
-    gap: 0.75rem;
     padding-inline: 1rem;
-  }
-
-  .topbar > .button {
-    display: none;
   }
 
   .hero {

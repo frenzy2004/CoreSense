@@ -38,54 +38,6 @@ const image = {
     "https://static.wixstatic.com/media/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg",
 };
 
-const navMenus = [
-  {
-    label: "Vision AI",
-    groups: [
-      ["Platform", "Computer Vision Platform", "Modules Hub"],
-      [
-        "Use Cases",
-        "Near Miss Detection",
-        "Worker Fatigue Detection",
-        "Unconscious Worker Detection",
-      ],
-    ],
-  },
-  {
-    label: "Industries",
-    groups: [
-      ["Manufacturing", "Automotive and EV", "Food and Beverage"],
-      ["Field Sites", "Construction", "Mining", "Oil and Gas", "Logistics"],
-    ],
-  },
-  {
-    label: "Products",
-    groups: [
-      ["viWEAR", "Smart Watch", "Smart Helmet"],
-      ["Hardware", "viLID - LiDAR", "viAER - Drone", "viMOV - Mobility"],
-      ["Software", "viHUB Platform", "4S Safety System", "Permit to Work"],
-    ],
-  },
-  {
-    label: "Solutions",
-    groups: [
-      ["Machine", "Crane Safety", "Forklift Safety", "Vehicle Control"],
-      ["Manpower", "Lone Worker Monitoring", "Incident Management"],
-      ["Milieu", "Area Control", "Space Management"],
-    ],
-  },
-  {
-    label: "Partners",
-    groups: [
-      ["Programs", "Channel Partner", "Reseller Partner", "Tech Partner"],
-    ],
-  },
-  {
-    label: "Resources",
-    groups: [["Library", "Case Studies", "Guides", "Glossary", "Blog"]],
-  },
-];
-
 const linkMap: Record<string, string> = {
   "Computer Vision Platform": "https://www.viact.ai/video-analytics-solution",
   "Modules Hub": "https://www.viact.ai/aimodules",
@@ -134,8 +86,6 @@ const linkMap: Record<string, string> = {
   Glossary: "https://www.viact.ai/glossary",
   Blog: "https://www.viact.ai/blogs",
 };
-
-const hrefFor = (label: string) => linkMap[label] ?? "https://www.viact.ai";
 
 const footerHref = (label: string) => {
   const footerMap: Record<string, string> = {
@@ -488,7 +438,6 @@ function Button({
 }
 
 export function SmartWatchClone() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedCase, setSelectedCase] = useState(0);
   const currentCase = useCases[selectedCase];
 
@@ -498,60 +447,7 @@ export function SmartWatchClone() {
         <a className="brand" href="https://www.viact.ai" aria-label="viAct home">
           <img src={image.logo} alt="viAct" />
         </a>
-
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {navMenus.map((menu) => (
-            <details className="nav-item" key={menu.label}>
-              <summary>{menu.label}</summary>
-              <div className="mega-menu">
-                {menu.groups.map(([title, ...items]) => (
-                  <div key={title}>
-                    <p>{title}</p>
-                    {items.map((item) => (
-                      <a href={hrefFor(item)} key={item}>
-                        {item}
-                      </a>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </details>
-          ))}
-        </nav>
-
-        <Button href="https://www.viact.ai/demo">Schedule Demo</Button>
-        <button
-          className="mobile-toggle"
-          aria-label="Toggle navigation"
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          <span />
-          <span />
-        </button>
       </header>
-
-      {mobileOpen ? (
-        <div className="mobile-menu">
-          {navMenus.map((menu) => (
-            <details key={menu.label}>
-              <summary>{menu.label}</summary>
-              {menu.groups.flatMap(([, ...items]) =>
-                items.map((item) => (
-                  <a
-                    href={hrefFor(item)}
-                    key={item}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item}
-                  </a>
-                )),
-              )}
-            </details>
-          ))}
-          <Button href="https://www.viact.ai/demo">Schedule Demo</Button>
-        </div>
-      ) : null}
 
       <section className="hero" id="top">
         <img className="hero-bg" src={image.heroWorker} alt="" aria-hidden />
