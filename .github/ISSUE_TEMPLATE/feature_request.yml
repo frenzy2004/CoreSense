@@ -1,0 +1,63 @@
+name: Feature request
+description: Propose a focused improvement to the CoreSense experience or evidence system.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User or operational need
+      description: Explain who needs this and what problem it solves.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful implementation.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loop-stage
+    attributes:
+      label: CoreSense loop stage
+      options:
+        - Sense
+        - Estimate
+        - Decide
+        - Act
+        - Record
+        - Product experience
+        - Documentation or evidence
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and claim impact
+      description: Identify supporting documents, new validation needs, and any limitation text that must change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable outcomes that would make the request complete.
+      placeholder: |
+        - [ ] The worker action remains unambiguous.
+        - [ ] Mobile and desktop layouts are verified.
+        - [ ] Relevant documentation is updated.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Product boundary
+      options:
+        - label: This request does not present CoreSense as a medical device or make unsupported performance claims.
+          required: true
