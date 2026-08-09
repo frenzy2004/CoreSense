@@ -10,7 +10,11 @@ const cssSource = await readFile(
   new URL("../app/globals.css", import.meta.url),
   "utf8",
 );
-const allPageSource = `${appSource}\n${cssSource}`;
+const contentSource = await readFile(
+  new URL("../app/coresense-content.ts", import.meta.url),
+  "utf8",
+);
+const allPageSource = `${appSource}\n${contentSource}\n${cssSource}`;
 const vercelConfig = JSON.parse(
   await readFile(new URL("../vercel.json", import.meta.url), "utf8"),
 );
