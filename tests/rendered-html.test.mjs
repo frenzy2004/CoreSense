@@ -44,9 +44,6 @@ const expectedUseCases = [
 const expectedOverviewCopy = [
   "Revolutionize Workplace Safety with the Smartest Watch Yet",
   "Experience the Perfect Fusion of AI and IoT for Unparalleled",
-  "Forbes Asia 100 to Watch 2022",
-  "Leading PropTech 50 China Region",
-  "4S Smart Site Safety System",
   "More Than a Wearable",
   "A cutting-edge tool designed to enhance safety and productivity in demanding work environments.",
   "Advanced AI Capabilities",
@@ -113,6 +110,10 @@ test("keeps screenshot-visible smart watch section copy", () => {
   ]) {
     assert.match(source, new RegExp(escapeRegExp(phrase)));
   }
+});
+
+test("does not render the awards logo bar below the hero", () => {
+  assert.doesNotMatch(source, /aria-label="Awards and recognition"/);
 });
 
 test("keeps demo destinations", () => {

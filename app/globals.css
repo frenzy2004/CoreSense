@@ -293,28 +293,6 @@ footer img {
   transform: none;
 }
 
-.award-strip {
-  display: grid;
-  grid-template-columns: repeat(11, minmax(88px, 1fr));
-  gap: 1px;
-  padding: 1px;
-  background: var(--line);
-}
-
-.award-logo {
-  display: grid;
-  place-items: center;
-  min-height: 96px;
-  padding: 0.8rem;
-  background: #fff;
-}
-
-.award-logo img {
-  max-width: 128px;
-  max-height: 66px;
-  object-fit: contain;
-}
-
 .section-pad {
   padding: clamp(4.2rem, 7vw, 7.5rem) clamp(1.25rem, 7vw, 10rem);
 }
@@ -1026,10 +1004,6 @@ footer p {
 
   .watch-stage img {
     width: min(430px, 44vw);
-  }
-
-  .award-strip {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .overview-card-copy,

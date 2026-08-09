@@ -38,53 +38,6 @@ const image = {
     "https://static.wixstatic.com/media/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/f2078f_0bf8d0e10f2c49f88dce9cb42e1889ab%7Emv2.jpg",
 };
 
-const awards = [
-  {
-    alt: "Forbes Asia 100 to Watch 2022",
-    src: "https://static.wixstatic.com/media/a550d3_af6d5d71778b462ab5ed1653e75aaa42~mv2.png/v1/fill/w_248,h_112,al_c,lg_1,q_85,enc_avif,quality_auto/Forbes%20Asia%20100%20to%20Watch%202022.png",
-  },
-  {
-    alt: "World Economic Forum Technology Pioneer 2023",
-    src: "https://static.wixstatic.com/media/a550d3_dfd0d7ef271e4152ab3993b86713ffc0~mv2.png/v1/fill/w_264,h_190,al_c,lg_1,q_85,enc_avif,quality_auto/Technology%20Pioneer%202023%20by%20the%20World%20Economic%20Forum.png",
-  },
-  {
-    alt: "Google Startups for Sustainable Development",
-    src: "https://static.wixstatic.com/media/a550d3_b036541795d24988b5cfea35a671820a~mv2.png/v1/fill/w_355,h_78,al_c,lg_1,q_85,enc_avif,quality_auto/Google%20Startups%20for%20Sustainability%20Development.png",
-  },
-  {
-    alt: "Deloitte Technology Fast Company 2023 Hong Kong",
-    src: "https://static.wixstatic.com/media/a550d3_72e62b93939f41a2acbdf2bfde1c3b39~mv2.png/v1/fill/w_218,h_58,al_c,lg_1,q_85,enc_avif,quality_auto/Deloitte%20Technology%20Fast%20Company%202023%20Hong%20Kong.png",
-  },
-  {
-    alt: "Josef Umdasch Research Prize 2022",
-    src: "https://static.wixstatic.com/media/a550d3_e775d313df5a46d4806b07a8fb0bf51b~mv2.png/v1/fill/w_276,h_122,al_c,lg_1,q_85,enc_avif,quality_auto/Austria%E2%80%99s%20josef%20umdasch%20research%20prize%202022.png",
-  },
-  {
-    alt: "Leading PropTech 50 China Region",
-    src: "https://static.wixstatic.com/media/a550d3_5c8d477dbc644f5eaf4824deee769197~mv2.png/v1/fill/w_321,h_139,al_c,lg_1,q_85,enc_avif,quality_auto/Leading%20PropTech%2050(China%20Region).png",
-  },
-  {
-    alt: "CEMEX Ventures Top 50 ConTech Startups",
-    src: "https://static.wixstatic.com/media/a550d3_5e321b6d7dd141d681597dc44200e7c9~mv2.png/v1/fill/w_284,h_126,al_c,lg_1,q_85,enc_avif,quality_auto/Top50%20ConTech%20Startups%202020%20by%20CEMEX%20Ventures.png",
-  },
-  {
-    alt: "Enterprise Singapore Slingshot 2021 sector winner",
-    src: "https://static.wixstatic.com/media/a550d3_8641bb6cf5bc438aad14c07515edb85e~mv2.png/v1/fill/w_302,h_93,al_c,lg_1,q_85,enc_avif,quality_auto/Sector%20Winner%20SLINGSHOT2021%20by%20Enterprise%20Singapore.png",
-  },
-  {
-    alt: "Construction Innovation and Technology Fund",
-    src: "https://static.wixstatic.com/media/d8b625_2f87a12a66be4711b5c11cc4c0dd4056~mv2.png/v1/fill/w_316,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo-CITF.png",
-  },
-  {
-    alt: "viAct 4S",
-    src: "https://static.wixstatic.com/media/d8b625_42cbbc362903483abc667f3e50cef43e~mv2.png/v1/fill/w_352,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo-viact-4s.png",
-  },
-  {
-    alt: "4S Smart Site Safety System",
-    src: "https://static.wixstatic.com/media/d8b625_0bcec211a80342d09448dde3b0484f9a~mv2.png/v1/fill/w_316,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo-4s.png",
-  },
-];
-
 const navMenus = [
   {
     label: "Vision AI",
@@ -621,14 +574,6 @@ export function SmartWatchClone() {
         <div className="watch-stage" aria-label="Smart watch product preview">
           <img src={image.watch} alt="AI-powered Smartwatch for Workplace Safety" />
         </div>
-      </section>
-
-      <section className="award-strip" aria-label="Awards and recognition">
-        {awards.map((award) => (
-          <div className="award-logo" key={award.alt}>
-            <img src={award.src} alt={award.alt} />
-          </div>
-        ))}
       </section>
 
       <section className="overview section-pad" id="overview">
