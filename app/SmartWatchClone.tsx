@@ -297,39 +297,43 @@ const reviews = [
 
 const faqs = [
   [
-    "How is an industrial smart watch different from a fitness tracker?",
+    "How is an Industrial Smart Watch different from a normal fitness tracker?",
     "A workplace safety watch is built for incident prevention. It combines health signals, motion, location, alerts, and site-system integration rather than passively counting activity.",
   ],
   [
-    "What does the watch monitor in real time?",
+    "What does an industrial IoT smart watch actually monitor in real time?",
     "It can track heart rate, body temperature, SpO2, movement, posture, location, fatigue indicators, and SOS events, then surface actionable alerts in the safety platform.",
   ],
   [
-    "How does monitoring work end to end?",
+    "How does safety monitoring with viAct IoT smart watch work end-to-end?",
     "The watch captures worker-level data, AI evaluates the signal at the edge or in the cloud, and viHUB gives supervisors alerts, records, and response context.",
   ],
   [
-    "Can it detect fatigue, falls, and distress?",
-    "Yes. Motion sensors, biometric trends, and configurable thresholds can trigger alerts for fatigue, falls, motionless states, critical vitals, and manual or automatic SOS.",
+    "Can viAct IoT smart watch detect worker fatigue?",
+    "Yes. Biometric trends, motion signals, and configurable thresholds can flag fatigue risk so supervisors can intervene earlier during long or high-risk shifts.",
   ],
   [
-    "How does it help prevent heat stress?",
-    "Skin temperature, heart rate, SpO2, and weather-station context can trigger early warnings so workers and supervisors can intervene before collapse or impairment.",
+    "How does a smart safety watch detect fall events and worker distress?",
+    "Motion sensors, posture changes, motionless-worker detection, critical vitals, and manual or automatic SOS can trigger alerts for falls, distress, and non-response events.",
   ],
   [
-    "How does it protect lone workers?",
-    "Location tracking, motionless-worker detection, fall detection, SOS escalation, and edge processing support workers in remote, confined, underground, or low-connectivity zones.",
-  ],
-  [
-    "Which industries benefit most?",
+    "Which industries benefit most from an IoT Safety Watch integration?",
     "Construction, oil and gas, mining, manufacturing, and logistics benefit most because workers often operate in zones where supervisors cannot continuously see them.",
   ],
   [
-    "How much does viAct's Smart Watch cost?",
+    "How does viAct Industrial Smart Watch detect and help prevent workplace heat stress?",
+    "Skin temperature, heart rate, SpO2, and weather-station context can trigger early warnings so workers and supervisors can intervene before collapse or impairment.",
+  ],
+  [
+    "How does the Smart Watch protect lone workers in remote, confined, underground, or isolated environments with low connectivity?",
+    "Location tracking, motionless-worker detection, fall detection, SOS escalation, and edge processing support workers in remote, confined, underground, or low-connectivity zones.",
+  ],
+  [
+    "How much does viAct's Smart Watch cost, and is it available on subscription?",
     "Pricing depends on device count, activated modules, connectivity, deployment model, and contract length. The original page directs commercial questions to sales or a demo.",
   ],
   [
-    "How does it protect worker privacy?",
+    "How does viAct's Smart Watch protect worker privacy while monitoring health data?",
     "The system treats biometric data as safety and operational data, uses role-based access, encrypts data in transit and at rest, and supports on-premises deployment where required.",
   ],
 ];
