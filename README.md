@@ -4,7 +4,7 @@
 
 CoreSense is a worker-safety prototype that combines on-wrist sensing, site conditions, conservative decision rules, clear worker actions, supervisor escalation, and a reviewable event record.
 
-[View the live CoreSense experience](https://coresense.vercel.app)
+[View the live CoreSense experience](https://core-sense.vercel.app)
 
 ![CoreSense heat-risk worker experience](public/coresense/heat-construction.png)
 
@@ -110,7 +110,7 @@ The Vercel build uses `npm run vercel-build` and publishes `dist/vercel` as a st
 npx vercel deploy --prod
 ```
 
-Production: [coresense.vercel.app](https://coresense.vercel.app)
+Production: [core-sense.vercel.app](https://core-sense.vercel.app)
 
 ## Source Material
 
