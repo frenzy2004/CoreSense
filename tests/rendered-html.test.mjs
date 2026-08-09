@@ -47,6 +47,17 @@ const expectedCoreSenseCopy = [
   "Privacy and auditability",
   "What CoreSense can prove today",
   "Turn invisible heat strain into one clear action.",
+  "Sense",
+  "Estimate",
+  "Decide",
+  "Act",
+  "Record",
+];
+
+const expectedCoreSenseVideos = [
+  "/coresense/product-hero.mp4",
+  "/coresense/heat-hydration.mp4",
+  "/coresense/storm-recall.mp4",
 ];
 
 const expectedEvidenceBoundaries = [
@@ -118,6 +129,29 @@ test("references only existing local CoreSense media", async () => {
   assert.ok(assetPaths.length >= 7);
   for (const assetPath of new Set(assetPaths)) {
     await access(new URL(`../public${assetPath}`, import.meta.url));
+  }
+});
+
+test("uses the supplied CoreSense motion assets with accessible controls", () => {
+  for (const assetPath of expectedCoreSenseVideos) {
+    assert.match(allPageSource, new RegExp(escapeRegExp(assetPath)));
+  }
+  assert.match(appSource, /<video/);
+  assert.match(appSource, /playsInline/);
+  assert.match(appSource, /aria-label=.*video/i);
+  assert.match(appSource, /prefers-reduced-motion:\s*reduce/);
+});
+
+test("maps each primary story to a distinct media asset", () => {
+  for (const mediaKey of [
+    "productVideo",
+    "heatVideo",
+    "stormVideo",
+    "wokwiLive",
+    "wokwiDiagram",
+    "sectors",
+  ]) {
+    assert.match(contentSource, new RegExp(escapeRegExp(mediaKey)));
   }
 });
 

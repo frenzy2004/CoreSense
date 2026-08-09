@@ -1,7 +1,11 @@
 export type Media = {
+  kind: "image" | "video";
   src: string;
   alt: string;
+  poster?: string;
   concept?: boolean;
+  evidenceLabel?: string;
+  position?: string;
 };
 
 export type OverviewTile = {
@@ -11,6 +15,7 @@ export type OverviewTile = {
 };
 
 export type FeatureRow = {
+  eyebrow: string;
   title: string;
   body: string;
   media: Media;
@@ -31,47 +36,88 @@ export const conceptDisclosure =
 export const hero = {
   eyebrow: "Personal heat-risk intelligence at the edge",
   title: "Heat risk workers can act on.",
-  body: "Personal heat-strain guidance on the wrist, with clear escalation and an evidence trail for supervisors.",
+  body: "CoreSense turns personal heat strain into one clear wrist action, a coordinated supervisor response, and a reviewable evidence trail.",
 };
 
 export const coreSenseImages = {
   heat: {
+    kind: "image",
     src: "/coresense/heat-construction.png",
     alt: "Construction worker checking a wrist band in hot site conditions",
     concept: true,
+    position: "center center",
   },
   storm: {
+    kind: "image",
     src: "/coresense/storm-shelter.png",
     alt: "Field workers returning to shelter before a tropical storm",
     concept: true,
+    position: "center center",
   },
   sectors: {
+    kind: "image",
     src: "/coresense/sector-impact.png",
     alt: "Construction, plantation, and logistics work settings",
     concept: true,
+    position: "center center",
   },
   product: {
+    kind: "image",
     src: "/coresense/product-concept.png",
     alt: "CoreSense rugged round-display worker band concept",
     concept: true,
+    position: "center center",
+  },
+  productVideo: {
+    kind: "video",
+    src: "/coresense/product-hero.mp4",
+    poster: "/coresense/product-concept.png",
+    alt: "CoreSense rugged round-display band rotating in a studio concept",
+    concept: true,
+    position: "center center",
+  },
+  heatVideo: {
+    kind: "video",
+    src: "/coresense/heat-hydration.mp4",
+    poster: "/coresense/heat-construction.png",
+    alt: "Worker checks a wearable and walks toward a shaded hydration point",
+    concept: true,
+    position: "center center",
+  },
+  stormVideo: {
+    kind: "video",
+    src: "/coresense/storm-recall.mp4",
+    poster: "/coresense/storm-shelter.png",
+    alt: "Field crew follows a supervisor toward shelter before a storm",
+    concept: true,
+    position: "center center",
   },
   wokwiBuild: {
+    kind: "image",
     src: "/coresense/wokwi-build-preview.png",
     alt: "CoreSense Wokwi firmware build preview",
+    evidenceLabel: "PROTOTYPE BUILD PREVIEW",
+    position: "center center",
   },
   wokwiLive: {
+    kind: "image",
     src: "/coresense/wokwi-live-preview.png",
     alt: "CoreSense live Wokwi prototype preview",
+    evidenceLabel: "SIMULATED PROTOTYPE PREVIEW",
+    position: "center center",
   },
   wokwiDiagram: {
+    kind: "image",
     src: "/coresense/wokwi-build-preview.svg",
     alt: "CoreSense wearable prototype component diagram",
+    evidenceLabel: "PROTOTYPE COMPONENT PATH",
+    position: "center center",
   },
 } satisfies Record<string, Media>;
 
 export const overviewLead = {
   title: "Sense. Estimate. Decide. Act. Record.",
-  body: "CoreSense turns worker and site signals into a clear on-wrist instruction, a supervisor response path, and a timestamped record of what happened next.",
+  body: "The band senses personal and site conditions, estimates heat strain with uncertainty, chooses a worker action, escalates when needed, and records the response.",
   media: coreSenseImages.product,
 };
 
@@ -82,69 +128,86 @@ export const overviewTiles: OverviewTile[] = [
       "Personal heat-strain evidence complements site WBGT.",
       "One ambient number is never treated as every worker's condition.",
     ],
-    media: coreSenseImages.heat,
+    media: coreSenseImages.heatVideo,
+  },
+  {
+    title: "Action before the graph",
+    bullets: [
+      "BAND OK, CAUTION, or REST NOW stays prominent on the wrist.",
+      "The response path continues from worker acknowledgement to supervisor review.",
+    ],
+    media: coreSenseImages.stormVideo,
   },
   {
     title: "Edge-first decisions",
     bullets: [
-      "The band estimates strain and selects the worker action locally.",
-      "Guidance can continue when the internet connection is unavailable.",
+      "The same decision contract is designed for firmware, simulator, and dashboard.",
+      "Local guidance can continue when internet service is unavailable.",
     ],
-    media: coreSenseImages.wokwiBuild,
+    media: coreSenseImages.wokwiLive,
   },
   {
     title: "Privacy by construction",
     bullets: [
       "Raw PPG does not leave the band.",
-      "Radio packets carry pseudonymous derived metrics instead of worker names.",
+      "Pseudonymous derived metrics form the minimum operational record.",
     ],
     media: coreSenseImages.wokwiDiagram,
-  },
-  {
-    title: "Operationally legible",
-    bullets: [
-      "The small screen prioritizes BAND OK, CAUTION, or REST NOW.",
-      "Haptics continue for an unacknowledged high-risk instruction.",
-    ],
-    media: coreSenseImages.storm,
   },
 ];
 
 export const featureRows: FeatureRow[] = [
   {
+    eyebrow: "Estimate",
     title: "Uncertainty-aware heat estimation",
-    body: "The published Buller ECTemp estimator runs once per minute from an aggregated heart-rate signal. Its uncertainty remains visible, and a high-risk alert requires both convergence and a conservative lower-bound check.",
-    media: coreSenseImages.wokwiLive,
+    body: "The published Buller ECTemp estimator runs from a minute heart-rate aggregate. Its confidence band stays visible, and RED requires convergence plus a conservative lower-bound gate. The point is not only the estimate, but knowing when not to trust it.",
+    media: coreSenseImages.wokwiBuild,
     imageFirst: false,
-    proof: "Source: science.md",
+    proof: "Engineering basis: science.md and WOKWI-VERIFICATION.md",
   },
   {
+    eyebrow: "Act",
     title: "Action-first worker interface",
-    body: "A round 240 by 240 display keeps the next safe action prominent. Wrist raise, button acknowledgement, timed display sleep, and repeating haptics are defined for the prototype workflow.",
-    media: coreSenseImages.product,
-    imageFirst: true,
-    proof: "Source: ONE-PAGE-SUMMARY.md",
-  },
-  {
-    title: "Environmental fallback",
-    body: "If wrist signal quality drops, CoreSense widens the uncertainty band and falls back to environmental guidance. Missing or stale input never becomes a confident green state.",
+    body: "A 240 by 240 round display prioritizes the next safe action. Wrist raise wakes the screen, a tap acknowledges RED, and repeating haptics continue while a high-risk instruction remains unacknowledged.",
     media: coreSenseImages.heat,
-    imageFirst: false,
-    proof: "Source: limitations.md",
-  },
-  {
-    title: "Edge connectivity without one SIM per worker",
-    body: "Bands use ESP-NOW to reach a shared site gateway. The on-wrist action remains local, while the gateway can relay higher-level events and acknowledgements when connectivity is available.",
-    media: coreSenseImages.wokwiDiagram,
     imageFirst: true,
-    proof: "Source: architecture.md",
+    proof: "Interaction contract: ONE-PAGE-SUMMARY.md",
   },
   {
-    title: "Privacy and auditability",
-    body: "Derived metrics, alert state, acknowledgements, and recovery events form the review trail. The design separates worker guidance from supervisor context and avoids transmitting raw optical waveforms.",
-    media: coreSenseImages.sectors,
+    eyebrow: "Fallback",
+    title: "Environmental fallback",
+    body: "When optical signal quality degrades, uncertainty widens and CoreSense does not silently guess. The worker visibly falls back to the site environmental advisory, so missing or stale personal input never becomes a confident green.",
+    media: coreSenseImages.storm,
     imageFirst: false,
-    proof: "Source: architecture.md",
+    proof: "Claim boundary: limitations.md",
+  },
+];
+
+export const systemSteps = [
+  {
+    step: "01",
+    title: "Sense",
+    body: "Heart rate, skin-side temperature, local air and humidity, motion, and site WBGT.",
+  },
+  {
+    step: "02",
+    title: "Estimate",
+    body: "On-device ECTemp filtering carries model uncertainty forward instead of hiding it.",
+  },
+  {
+    step: "03",
+    title: "Decide",
+    body: "Personal strain and environmental exposure are evaluated conservatively.",
+  },
+  {
+    step: "04",
+    title: "Act",
+    body: "Text, shape, color, and haptics tell the worker what to do next.",
+  },
+  {
+    step: "05",
+    title: "Record",
+    body: "Alert, acknowledgement, rest, recovery, and exceptions form the review trail.",
   },
 ];
 
@@ -152,8 +215,8 @@ export const useCases: UseCase[] = [
   {
     label: "Early heat-strain action",
     title: "Act before heat strain becomes obvious",
-    body: "Combine a worker's changing heart-rate pattern with site heat conditions, then present a direct work, caution, or rest instruction on the wrist.",
-    media: coreSenseImages.heat,
+    body: "Combine a worker's changing physiological response with site heat conditions, then present a direct work, caution, or rest instruction on the wrist.",
+    media: coreSenseImages.heatVideo,
   },
   {
     label: "Signal-quality fallback",
@@ -163,81 +226,88 @@ export const useCases: UseCase[] = [
   },
   {
     label: "Supervisor escalation",
-    title: "Give supervisors response context",
-    body: "Escalated events can carry the band state, site advisory, acknowledgement status, and a traceable source snapshot for review.",
-    media: coreSenseImages.storm,
+    title: "Coordinate the response, not only the alert",
+    body: "An escalated event can carry the band state, site advisory, acknowledgement status, selected action, and response context for the supervisor.",
+    media: coreSenseImages.stormVideo,
   },
   {
     label: "Recovery and audit trail",
-    title: "Record the response, not only the alert",
-    body: "Acknowledgement and recovery events create a timestamped trail showing what was detected, what action followed, and when conditions improved.",
-    media: coreSenseImages.product,
+    title: "Record what happened next",
+    body: "Acknowledgement, rest, recovery, and exception events create a timestamped trail for internal safety review with its limits attached.",
+    media: coreSenseImages.productVideo,
   },
   {
     label: "Offline site operation",
     title: "Keep the worker action at the edge",
-    body: "The band and shared site gateway reduce dependence on one cloud connection or SIM per worker while keeping local procedures authoritative.",
+    body: "Edge connectivity without one SIM per worker reduces cloud dependence while keeping the local action available and existing site procedures authoritative.",
     media: coreSenseImages.sectors,
   },
 ];
+
+export const industriesIntro = {
+  title: "One operating loop across heat-exposed work",
+  body: "The same worker action, supervisor response, and reviewable record can be evaluated beside existing controls in five pilot settings.",
+  media: coreSenseImages.sectors,
+};
 
 export const industries = [
   {
     title: "Construction",
     kicker: "Outdoor build sites",
-    body: "Pilot personal heat guidance alongside site WBGT, hydration, shade, and established work-rest procedures.",
+    body: "Evaluate personal guidance beside site WBGT, hydration, shade, and established work-rest procedures.",
   },
   {
     title: "Plantations",
     kicker: "Distributed field crews",
-    body: "Support workers across humid, sun-exposed areas where site conditions and individual workload can vary quickly.",
+    body: "Support humid, sun-exposed work where conditions and individual workload can change quickly.",
   },
   {
     title: "Utilities",
     kicker: "Mobile maintenance teams",
-    body: "Keep a local worker instruction available while crews move between exposed, remote, and infrastructure-heavy locations.",
+    body: "Keep a local worker instruction available across exposed and remote infrastructure locations.",
   },
   {
     title: "Logistics",
     kicker: "Yards and warehouses",
-    body: "Add personal heat-strain context to shift planning, loading areas, vehicle yards, and high-workload operations.",
+    body: "Add personal heat-strain context to loading areas, vehicle yards, and high-workload shifts.",
   },
   {
     title: "Municipal field teams",
     kicker: "Public outdoor services",
-    body: "Evaluate the same action and acknowledgement workflow for maintenance, inspection, and emergency-support crews.",
+    body: "Evaluate the action and acknowledgement workflow for maintenance and inspection crews.",
   },
 ];
+
+export const evidenceLead = {
+  label: "Engineering evidence",
+  title: "A reproducible prototype path, not a field claim",
+  body: "The local firmware build, Wokwi previews, deterministic scenarios, and versioned calculations show how CoreSense can be inspected. They do not prove assembled runtime, clinical accuracy, field effectiveness, or certification.",
+  media: coreSenseImages.wokwiLive,
+};
 
 export const evidenceCards = [
   {
     label: "Published basis",
     title: "A documented estimator",
-    body: "The implementation follows the published Buller heart-rate-to-ECTemp model and states its cadence, coefficients, uncertainty, and validation domain.",
+    body: "The implementation states the Buller model cadence, coefficients, uncertainty, and validation domain.",
     source: "science.md",
   },
   {
     label: "Shared logic",
     title: "One decision contract",
-    body: "The same estimator and decision rules are intended for firmware, simulator, and dashboard paths to reduce silent drift between demonstrations.",
+    body: "Firmware, simulator, and dashboard paths are designed around the same estimator and decision rules.",
     source: "architecture.md",
   },
   {
-    label: "Engineering evidence",
-    title: "A reproducible prototype path",
-    body: "Local firmware builds, Wokwi previews, deterministic scenarios, and versioned calculations show how the concept can be inspected and repeated.",
-    source: "WOKWI-VERIFICATION.md",
-  },
-  {
     label: "Data boundary",
-    title: "Privacy-aware by design",
-    body: "Raw optical data stays on the band. Derived pseudonymous scalars, alert state, and acknowledgements form the minimum operational record.",
+    title: "Privacy and auditability",
+    body: "Raw optical data stays on the band. Derived pseudonymous metrics and response events form the review record.",
     source: "ONE-PAGE-SUMMARY.md",
   },
   {
     label: "Validation backlog",
     title: "Unknowns stay visible",
-    body: "Readability, false wrist wakes, assembled runtime, durability, clinical accuracy, field effectiveness, and certification remain unmeasured or unverified.",
+    body: "Readability, false wrist wakes, assembled runtime, durability, target-workforce accuracy, field effectiveness, and certification remain open gates.",
     source: "limitations.md",
   },
 ];
@@ -256,12 +326,12 @@ export const faqs = [
   {
     question: "What happens when wrist signal quality degrades?",
     answer:
-      "The estimator runs predict-only, its uncertainty grows, and high-risk escalation is withheld unless the conservative decision gates still pass. Environmental guidance remains available as the fallback.",
+      "The estimator runs predict-only, uncertainty grows, and high-risk escalation is withheld unless the conservative gates still pass. Environmental guidance remains available as the fallback.",
   },
   {
     question: "How do the band and site gateway communicate?",
     answer:
-      "The proposed band uses ESP-NOW for short 2.4 GHz packets to a shared gateway. This avoids a SIM per worker while allowing a gateway to relay events when internet service is available.",
+      "The proposed band uses ESP-NOW for short 2.4 GHz packets to a shared gateway. This avoids a SIM per worker while allowing the gateway to relay events when internet service is available.",
   },
   {
     question: "What data leaves the band?",
@@ -271,7 +341,7 @@ export const faqs = [
   {
     question: "Is CoreSense a medical device?",
     answer:
-      "No. CoreSense is a safety decision-support prototype, not a clinical thermometer or medical device. Its estimator and interface require target-workforce validation before operational reliance.",
+      "No. CoreSense is a safety decision-support prototype, not a clinical thermometer or medical device. It requires target-workforce validation before operational reliance.",
   },
   {
     question: "How mature are the battery and wearable hardware?",

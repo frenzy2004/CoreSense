@@ -1,19 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import type { ReactNode } from "react";
-import { useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   conceptDisclosure,
   coreSenseImages,
   evidenceCards,
+  evidenceLead,
   faqs,
   featureRows,
   footerLinks,
   hero,
   industries,
+  industriesIntro,
   overviewLead,
   overviewTiles,
+  systemSteps,
   useCases,
   type Media,
 } from "./coresense-content";
@@ -34,19 +37,110 @@ function Button({
   );
 }
 
-function Disclosure({ className = "" }: { className?: string }) {
+function Disclosure({
+  className = "",
+  children = conceptDisclosure,
+}: {
+  className?: string;
+  children?: ReactNode;
+}) {
   return (
-    <span className={`media-disclosure ${className}`.trim()}>
-      {conceptDisclosure}
-    </span>
+    <span className={`media-disclosure ${className}`.trim()}>{children}</span>
   );
 }
 
-function FeatureMedia({ media }: { media: Media }) {
+function MediaFrame({
+  media,
+  className = "",
+  priority = false,
+}: {
+  media: Media;
+  className?: string;
+  priority?: boolean;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (media.kind !== "video" || !videoRef.current) return;
+
+    const video = videoRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const syncPlayback = () => {
+      if (reduceMotion.matches) {
+        video.pause();
+        setIsPlaying(false);
+        return;
+      }
+
+      void video
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
+    };
+
+    syncPlayback();
+    reduceMotion.addEventListener("change", syncPlayback);
+    return () => reduceMotion.removeEventListener("change", syncPlayback);
+  }, [media.kind, media.src]);
+
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      void video.play().then(() => setIsPlaying(true));
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const style = {
+    "--media-position": media.position ?? "center center",
+  } as CSSProperties;
+
   return (
-    <figure className="feature-media-frame">
-      <img className="feature-media" src={media.src} alt={media.alt} />
+    <figure className={`media-frame ${className}`.trim()} style={style}>
+      {media.kind === "video" ? (
+        <>
+          <video
+            ref={videoRef}
+            className="media-element"
+            loop
+            muted
+            playsInline
+            poster={media.poster}
+            preload={priority ? "auto" : "metadata"}
+            onPause={() => setIsPlaying(false)}
+            onPlay={() => setIsPlaying(true)}
+          >
+            <source src={media.src} type="video/mp4" />
+          </video>
+          <button
+            className="video-control"
+            type="button"
+            aria-label={isPlaying ? "Pause concept video" : "Play concept video"}
+            onClick={togglePlayback}
+          >
+            <span
+              aria-hidden
+              className={`video-control-icon ${isPlaying ? "pause" : "play"}`}
+            />
+          </button>
+        </>
+      ) : (
+        <img
+          className="media-element"
+          src={media.src}
+          alt={media.alt}
+          loading={priority ? "eager" : "lazy"}
+        />
+      )}
+      {media.kind === "video" && <span className="sr-only">{media.alt}</span>}
       {media.concept && <Disclosure />}
+      {media.evidenceLabel && <Disclosure>{media.evidenceLabel}</Disclosure>}
     </figure>
   );
 }
@@ -76,18 +170,15 @@ export function SmartWatchClone() {
         <Disclosure className="hero-bg-disclosure" />
         <div className="hero-copy">
           <span className="hero-eyebrow">{hero.eyebrow}</span>
-          <h1>
-            Heat risk workers
-            <br />
-            can act on.
-          </h1>
+          <h1>{hero.title}</h1>
           <p>{hero.body}</p>
           <Button href="#overview">Explore CoreSense</Button>
         </div>
-        <figure className="watch-stage" aria-label="CoreSense product concept">
-          <img src={coreSenseImages.product.src} alt={coreSenseImages.product.alt} />
-          <Disclosure className="product-disclosure" />
-        </figure>
+        <MediaFrame
+          className="hero-product"
+          media={coreSenseImages.productVideo}
+          priority
+        />
       </section>
 
       <section className="overview section-pad" id="overview">
@@ -97,12 +188,10 @@ export function SmartWatchClone() {
         </div>
         <div className="overview-grid">
           <article className="overview-card overview-card-wide">
-            <img
-              className="overview-card-bg"
-              src={overviewLead.media.src}
-              alt={overviewLead.media.alt}
+            <MediaFrame
+              className="overview-card-media"
+              media={overviewLead.media}
             />
-            {overviewLead.media.concept && <Disclosure />}
             <div className="overview-card-copy">
               <h3>{overviewLead.title}</h3>
               <p>{overviewLead.body}</p>
@@ -110,12 +199,7 @@ export function SmartWatchClone() {
           </article>
           {overviewTiles.map((card) => (
             <article className="overview-card" key={card.title}>
-              <img
-                className="overview-card-bg"
-                src={card.media.src}
-                alt={card.media.alt}
-              />
-              {card.media.concept && <Disclosure />}
+              <MediaFrame className="overview-card-media" media={card.media} />
               <div className="overview-card-copy">
                 <h3>{card.title}</h3>
                 <ul>
@@ -131,7 +215,10 @@ export function SmartWatchClone() {
       </section>
 
       <section className="features section-pad" id="features">
-        <h2>Unique Features</h2>
+        <div className="dark-section-heading">
+          <span>Built around the decision</span>
+          <h2>Unique Features</h2>
+        </div>
         <div className="feature-stack">
           {featureRows.map((feature) => (
             <article
@@ -141,19 +228,38 @@ export function SmartWatchClone() {
               key={feature.title}
             >
               <div className="feature-copy">
+                <span className="feature-eyebrow">{feature.eyebrow}</span>
                 <h3>{feature.title}</h3>
                 <p>{feature.body}</p>
                 <span className="feature-proof">{feature.proof}</span>
               </div>
-              <FeatureMedia media={feature.media} />
+              <MediaFrame className="feature-media-frame" media={feature.media} />
             </article>
           ))}
         </div>
-        <Button href="#use-cases">Explore site workflows</Button>
+      </section>
+
+      <section className="system-loop" aria-labelledby="system-loop-title">
+        <div className="system-loop-heading">
+          <span>CoreSense operating loop</span>
+          <h2 id="system-loop-title">One signal is only useful when it leads to action.</h2>
+        </div>
+        <ol className="system-loop-steps">
+          {systemSteps.map((item) => (
+            <li key={item.step}>
+              <span className="system-step-number">{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="use-cases section-pad" id="use-cases">
-        <h2>Use Cases</h2>
+        <div className="section-title compact">
+          <span>Use Cases</span>
+          <h2>From risk to a closed response</h2>
+        </div>
         <div className="case-layout">
           <div
             className="case-tabs"
@@ -172,6 +278,7 @@ export function SmartWatchClone() {
                 tabIndex={selectedCase === index ? 0 : -1}
                 type="button"
               >
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 {item.label}
               </button>
             ))}
@@ -182,12 +289,11 @@ export function SmartWatchClone() {
             role="tabpanel"
             aria-labelledby={`case-tab-${selectedCase}`}
           >
-            <img
+            <MediaFrame
               key={currentCase.media.src}
-              src={currentCase.media.src}
-              alt={currentCase.media.alt}
+              className="case-media"
+              media={currentCase.media}
             />
-            {currentCase.media.concept && <Disclosure />}
             <div className="case-overlay">
               <h3>{currentCase.title}</h3>
               <p>{currentCase.body}</p>
@@ -197,12 +303,27 @@ export function SmartWatchClone() {
       </section>
 
       <section className="industries section-pad" id="industries">
-        <h2>Industries</h2>
-        <div className="industry-grid">
-          {industries.map((industry) => (
-            <article className="industry-card" key={industry.title}>
-              <span className="industry-kicker">{industry.kicker}</span>
-              <h3>{industry.title}</h3>
+        <div className="section-title compact">
+          <span>Industries</span>
+          <h2>Built to be tested beside existing controls</h2>
+        </div>
+        <div className="industry-story">
+          <MediaFrame className="industry-panorama" media={industriesIntro.media} />
+          <div className="industry-intro-copy">
+            <h3>{industriesIntro.title}</h3>
+            <p>{industriesIntro.body}</p>
+          </div>
+        </div>
+        <div className="industry-index">
+          {industries.map((industry, index) => (
+            <article className="industry-row" key={industry.title}>
+              <span className="industry-number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <span className="industry-kicker">{industry.kicker}</span>
+                <h3>{industry.title}</h3>
+              </div>
               <p>{industry.body}</p>
             </article>
           ))}
@@ -213,6 +334,14 @@ export function SmartWatchClone() {
         <div className="reviews-shell">
           <div className="reviews-badge">Evidence</div>
           <h2>What CoreSense can prove today</h2>
+          <article className="evidence-lead">
+            <MediaFrame className="evidence-lead-media" media={evidenceLead.media} />
+            <div className="evidence-lead-copy">
+              <span>{evidenceLead.label}</span>
+              <h3>{evidenceLead.title}</h3>
+              <p>{evidenceLead.body}</p>
+            </div>
+          </article>
           <div className="review-grid evidence-grid">
             {evidenceCards.map((card) => (
               <article className="review-card evidence-card" key={card.title}>
@@ -242,10 +371,12 @@ export function SmartWatchClone() {
       </section>
 
       <section className="final-cta" id="demo">
+        <span>Governed pilot candidate</span>
         <h2>Turn invisible heat strain into one clear action.</h2>
         <p>
           CoreSense is a safety decision-support prototype, not a clinical
-          thermometer or medical device.
+          thermometer or medical device. It works beside site WBGT and existing
+          heat controls, not in place of them.
         </p>
         <div className="final-cta-actions">
           <Button href="#overview">Review the system</Button>
@@ -265,8 +396,8 @@ export function SmartWatchClone() {
               <span className="brand-name">CoreSense</span>
             </a>
             <p>
-              Personal heat-risk guidance at the edge, with uncertainty kept
-              visible and worker action kept clear.
+              Personal heat-risk guidance at the edge, with uncertainty visible
+              and the next worker action clear.
             </p>
           </div>
           <h2>Built for accountable heat-safety pilots.</h2>
