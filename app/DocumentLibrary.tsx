@@ -127,6 +127,21 @@ export function DocumentLibrary({
         </button>
       </div>
 
+      <div className="document-mobile-select">
+        <label htmlFor="document-select">Choose a project document</label>
+        <select
+          id="document-select"
+          value={selectedPath}
+          onChange={(event) => onSelect(event.target.value)}
+        >
+          {coreSenseDocuments.map((document) => (
+            <option key={document.path} value={document.path}>
+              {document.category}: {document.title}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="document-viewer-layout">
         <aside className="document-index" aria-label="CoreSense documents">
           <label htmlFor="document-search">Search 31 documents</label>

@@ -3,21 +3,36 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { MalaysiaEvidenceMap } from "./MalaysiaEvidenceMap";
 import {
-  conceptDisclosure,
+  aiDisclosure,
+  beneficiaries,
+  beneficiaryCards,
   coreSenseImages,
-  evidenceCards,
-  evidenceLead,
+  coreSentence,
+  demoUrl,
+  emergencyCopy,
+  evidenceDocuments,
   faqs,
-  featureRows,
   footerLinks,
+  footerStatement,
   hero,
-  industries,
-  industriesIntro,
-  overviewLead,
-  overviewTiles,
+  implementedProof,
+  labels,
+  openValidationGates,
+  pilotOffer,
+  problem,
+  problemCards,
+  requiredBoundary,
+  solution,
+  supervisorCapabilities,
+  supervisorExperience,
   systemSteps,
-  useCases,
+  technicalProof,
+  weatherContext,
+  weatherRules,
+  workerExperience,
+  workerInteractions,
   type Media,
 } from "./coresense-content";
 
@@ -36,23 +51,33 @@ function Button({
   children: ReactNode;
   variant?: "primary" | "secondary";
 }) {
+  const external = href.startsWith("https://");
+
+  if (external) {
+    return (
+      <a
+        className={`button button-${variant}`}
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a className={`button button-${variant}`} href={href}>
+    <a
+      className={`button button-${variant}`}
+      href={href}
+    >
       {children}
     </a>
   );
 }
 
-function Disclosure({
-  className = "",
-  children = conceptDisclosure,
-}: {
-  className?: string;
-  children?: ReactNode;
-}) {
-  return (
-    <span className={`media-disclosure ${className}`.trim()}>{children}</span>
-  );
+function Disclosure({ children }: { children: ReactNode }) {
+  return <span className="media-disclosure">{children}</span>;
 }
 
 function MediaFrame({
@@ -71,14 +96,9 @@ function MediaFrame({
 
     const video = videoRef.current;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
     const syncPlayback = () => {
-      if (reduceMotion.matches) {
-        video.pause();
-        return;
-      }
-
-      void video.play().catch(() => undefined);
+      if (reduceMotion.matches) video.pause();
+      else void video.play().catch(() => undefined);
     };
 
     syncPlayback();
@@ -89,6 +109,8 @@ function MediaFrame({
   const style = {
     "--media-position": media.position ?? "center center",
   } as CSSProperties;
+  const disclosure = media.evidenceLabel ??
+    (media.concept ? labels.conceptVisual : undefined);
 
   return (
     <figure className={`media-frame ${className}`.trim()} style={style}>
@@ -113,17 +135,34 @@ function MediaFrame({
           loading={priority ? "eager" : "lazy"}
         />
       )}
-      {media.kind === "video" && <span className="sr-only">{media.alt}</span>}
-      {media.concept && <Disclosure />}
-      {media.evidenceLabel && <Disclosure>{media.evidenceLabel}</Disclosure>}
+      {media.kind === "video" ? <span className="sr-only">{media.alt}</span> : null}
+      {disclosure ? <Disclosure>{disclosure}</Disclosure> : null}
     </figure>
   );
 }
 
+function SectionHeading({
+  eyebrow,
+  title,
+  body,
+  light = false,
+}: {
+  eyebrow: string;
+  title: string;
+  body?: string;
+  light?: boolean;
+}) {
+  return (
+    <header className={`section-heading ${light ? "section-heading-light" : ""}`}>
+      <span className="eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      {body ? <p>{body}</p> : null}
+    </header>
+  );
+}
+
 export function SmartWatchClone() {
-  const [selectedCase, setSelectedCase] = useState(0);
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
-  const currentCase = useCases[selectedCase];
 
   return (
     <main className="site-shell">
@@ -137,271 +176,279 @@ export function SmartWatchClone() {
       </header>
 
       <section className="hero" id="top">
-        <img
-          className="hero-bg"
-          src={coreSenseImages.heat.src}
-          alt=""
-          aria-hidden
-        />
-        <Disclosure className="hero-bg-disclosure" />
+        <img className="hero-bg" src={coreSenseImages.heat.src} alt="" aria-hidden />
         <div className="hero-copy">
-          <span className="hero-eyebrow">{hero.eyebrow}</span>
+          <span className="eyebrow">{hero.eyebrow}</span>
           <h1>{hero.title}</h1>
           <p>{hero.body}</p>
-          <Button href="#overview">Explore CoreSense</Button>
+          <div className="button-row">
+            <Button href={demoUrl}>Open interactive demo</Button>
+            <Button href="#problem" variant="secondary">
+              How it works
+            </Button>
+          </div>
+          <small className="hero-note">{hero.note}</small>
         </div>
+        <Disclosure>{labels.conceptVisual}</Disclosure>
       </section>
 
-      <section className="overview section-pad" id="overview">
-        <div className="section-title">
-          <span>Overview</span>
-          <h2>From signal to safer action</h2>
-        </div>
-        <div className="overview-grid">
-          <article className="overview-card overview-card-wide">
-            <MediaFrame
-              className="overview-card-media"
-              media={overviewLead.media}
-            />
-            <div className="overview-card-copy">
-              <h3>{overviewLead.title}</h3>
-              <p>{overviewLead.body}</p>
-            </div>
-          </article>
-          {overviewTiles.map((card) => (
-            <article className="overview-card" key={card.title}>
-              <MediaFrame className="overview-card-media" media={card.media} />
-              <div className="overview-card-copy">
-                <h3>{card.title}</h3>
-                <ul>
-                  {card.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
+      <section className="problem section-pad" id="problem">
+        <SectionHeading eyebrow={problem.eyebrow} title={problem.title} body={problem.body} />
+        <p className="core-sentence">{coreSentence}</p>
+        <div className="problem-grid">
+          {problemCards.map((card) => (
+            <article className="problem-card" key={card.number}>
+              <span>{card.number}</span>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
             </article>
           ))}
         </div>
-        <Button href="#features">See how it works</Button>
+        <a className="text-link" href="#solution-loop">
+          See how the system works
+        </a>
       </section>
 
-      <section className="features section-pad" id="features">
-        <div className="dark-section-heading">
-          <span>Built around the decision</span>
-          <h2>Unique Features</h2>
-        </div>
-        <div className="feature-stack">
-          {featureRows.map((feature) => (
-            <article
-              className={`feature-showcase ${
-                feature.imageFirst ? "image-first" : ""
-              }`}
-              key={feature.title}
-            >
-              <div className="feature-copy">
-                <span className="feature-eyebrow">{feature.eyebrow}</span>
-                <h3>{feature.title}</h3>
-                <p>{feature.body}</p>
-                <button
-                  className="feature-proof document-trigger"
-                  type="button"
-                  onClick={() => setSelectedDocument(feature.sourceDoc)}
-                >
-                  {feature.proof}
-                </button>
-              </div>
-              <MediaFrame className="feature-media-frame" media={feature.media} />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="system-loop" aria-labelledby="system-loop-title">
-        <div className="system-loop-heading">
-          <span>CoreSense operating loop</span>
-          <h2 id="system-loop-title">One signal is only useful when it leads to action.</h2>
+      <section className="solution-loop section-pad dark-section" id="solution-loop">
+        <div className="solution-intro">
+          <SectionHeading
+            eyebrow={solution.eyebrow}
+            title={solution.title}
+            body={solution.body}
+            light
+          />
+          <MediaFrame className="solution-media" media={coreSenseImages.productVideo} />
         </div>
         <ol className="system-loop-steps">
           {systemSteps.map((item) => (
             <li key={item.step}>
               <span className="system-step-number">{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
             </li>
           ))}
         </ol>
+        <p className="boundary-panel">{solution.boundary}</p>
+        <Button href={demoUrl}>Open interactive demo</Button>
       </section>
 
-      <section className="use-cases section-pad" id="use-cases">
-        <div className="section-title compact">
-          <span>Use Cases</span>
-          <h2>From risk to a closed response</h2>
-        </div>
-        <div className="case-layout">
-          <div
-            className="case-tabs"
-            role="tablist"
-            aria-label="CoreSense use cases"
-          >
-            {useCases.map((item, index) => (
-              <button
-                id={`case-tab-${index}`}
-                aria-controls="case-panel"
-                aria-selected={selectedCase === index}
-                className={selectedCase === index ? "active" : ""}
-                key={item.label}
-                onClick={() => setSelectedCase(index)}
-                role="tab"
-                tabIndex={selectedCase === index ? 0 : -1}
-                type="button"
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <article
-            className="case-panel"
-            id="case-panel"
-            role="tabpanel"
-            aria-labelledby={`case-tab-${selectedCase}`}
-          >
-            <MediaFrame
-              key={currentCase.media.src}
-              className="case-media"
-              media={currentCase.media}
+      <section className="worker-experience section-pad" id="worker-experience">
+        <div className="editorial-grid">
+          <div className="editorial-copy">
+            <SectionHeading
+              eyebrow={workerExperience.eyebrow}
+              title={workerExperience.title}
+              body={workerExperience.body}
             />
-            <div className="case-overlay">
-              <h3>{currentCase.title}</h3>
-              <p>{currentCase.body}</p>
-            </div>
-          </article>
+            <ul className="numbered-list">
+              {workerInteractions.map((item, index) => (
+                <li key={item}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <MediaFrame className="editorial-media" media={coreSenseImages.heatVideo} />
         </div>
+        <p className="boundary-panel boundary-panel-light">{workerExperience.boundary}</p>
+        <Button href={demoUrl}>Open interactive demo</Button>
       </section>
 
-      <section className="industries section-pad" id="industries">
-        <div className="section-title compact">
-          <span>Industries</span>
-          <h2>Built to be tested beside existing controls</h2>
-        </div>
-        <div className="industry-story">
-          <MediaFrame className="industry-panorama" media={industriesIntro.media} />
-          <div className="industry-intro-copy">
-            <h3>{industriesIntro.title}</h3>
-            <p>{industriesIntro.body}</p>
+      <section
+        className="supervisor-experience section-pad dark-section"
+        id="supervisor-experience"
+      >
+        <div className="editorial-grid editorial-grid-dark">
+          <MediaFrame className="editorial-media" media={coreSenseImages.wokwiLive} />
+          <div className="editorial-copy">
+            <SectionHeading
+              eyebrow={supervisorExperience.eyebrow}
+              title={supervisorExperience.title}
+              body={supervisorExperience.body}
+              light
+            />
+            <div className="capability-list">
+              {supervisorCapabilities.map((capability) => (
+                <details key={capability.title}>
+                  <summary>{capability.title}</summary>
+                  <p>{capability.body}</p>
+                </details>
+              ))}
+            </div>
+            <p className="simulation-label">{labels.simulation}</p>
           </div>
         </div>
-        <div className="industry-index">
-          {industries.map((industry, index) => (
-            <article className="industry-row" key={industry.title}>
-              <span className="industry-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
+
+      <div className="weather-panel">
+          <div>
+            <span className="eyebrow">{weatherContext.eyebrow}</span>
+            <h3>{weatherContext.title}</h3>
+            <p>{weatherContext.body}</p>
+            <details className="weather-rules">
+              <summary>Operational boundaries</summary>
+              <ul>
+                {weatherRules.map((rule) => (
+                  <li key={rule}>{rule}</li>
+                ))}
+              </ul>
+            </details>
+          </div>
+          <div>
+            <MediaFrame className="weather-media" media={coreSenseImages.stormVideo} />
+            <div className="emergency-copy" aria-label="Bilingual emergency copy">
+              {emergencyCopy.map((line, index) => (
+                <p className={index % 2 === 0 ? "emergency-title" : ""} key={line}>
+                  {line}
+                </p>
+              ))}
+            </div>
+        </div>
+      </div>
+
+      <div className="supervisor-action">
+        <Button href={demoUrl}>Open interactive demo</Button>
+      </div>
+    </section>
+
+      <section className="malaysia-evidence section-pad" id="malaysia-evidence">
+        <MalaysiaEvidenceMap />
+      </section>
+
+      <section className="technical-proof section-pad dark-section" id="technical-proof">
+        <SectionHeading eyebrow={technicalProof.eyebrow} title={technicalProof.title} light />
+
+        <div className="proof-columns">
+          <article>
+            <span className="proof-state proof-state-live">Implemented / demonstrable now</span>
+            <ul>
+              {implementedProof.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+          <article>
+            <span className="proof-state proof-state-open">Open validation gates</span>
+            <ul>
+              {openValidationGates.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
+
+        <div className="proof-media-grid">
+          <MediaFrame media={coreSenseImages.wokwiBuild} />
+        </div>
+
+        <div className="documents-heading">
+          <div>
+            <span className="eyebrow">Project evidence</span>
+            <h3>Inspect the source material.</h3>
+          </div>
+          <button
+            className="docs-button"
+            type="button"
+            onClick={() => setSelectedDocument("ONE-PAGE-SUMMARY.md")}
+          >
+            Browse project documents
+          </button>
+        </div>
+        <div className="document-card-grid">
+          {evidenceDocuments.map((card) => (
+            <details className="evidence-card" key={card.source}>
+              <summary>
+                <span>{card.label}</span>
+                <strong>{card.title}</strong>
+              </summary>
               <div>
-                <span className="industry-kicker">{industry.kicker}</span>
-                <h3>{industry.title}</h3>
-              </div>
-              <p>{industry.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="reviews evidence section-pad" id="evidence">
-        <div className="reviews-shell">
-          <div className="reviews-badge">Evidence</div>
-          <div className="evidence-heading-row">
-            <h2>What CoreSense can prove today</h2>
-            <button
-              className="docs-button"
-              type="button"
-              onClick={() => setSelectedDocument("ONE-PAGE-SUMMARY.md")}
-            >
-              Browse all documents
-            </button>
-          </div>
-          <article className="evidence-lead">
-            <MediaFrame className="evidence-lead-media" media={evidenceLead.media} />
-            <div className="evidence-lead-copy">
-              <span>{evidenceLead.label}</span>
-              <h3>{evidenceLead.title}</h3>
-              <p>{evidenceLead.body}</p>
-            </div>
-          </article>
-          <div className="review-grid evidence-grid">
-            {evidenceCards.map((card) => (
-              <article className="review-card evidence-card" key={card.title}>
-                <span className="evidence-label">{card.label}</span>
-                <h3>{card.title}</h3>
                 <p>{card.body}</p>
                 <button
-                  className="evidence-source document-trigger"
+                  className="document-trigger"
                   type="button"
                   onClick={() => setSelectedDocument(card.source)}
                 >
                   Source: {card.source}
                 </button>
-              </article>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        <div className="faq-block" id="faq">
+          <div className="subsection-heading">
+            <span className="eyebrow">FAQ</span>
+            <h3>Boundaries in plain language.</h3>
+          </div>
+          <div className="faq-list">
+            {faqs.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="faq section-pad" id="faq">
-        <div className="section-title compact">
-          <span>FAQ</span>
-          <h2>Frequently asked questions</h2>
-        </div>
-        <div className="faq-list">
-          {faqs.map((item) => (
-            <details key={item.question}>
-              <summary>{item.question}</summary>
-              <p>{item.answer}</p>
+      <section className="pilot section-pad" id="pilot">
+        <SectionHeading eyebrow={beneficiaries.eyebrow} title={beneficiaries.title} />
+        <div className="beneficiary-grid">
+          {beneficiaryCards.map((card) => (
+            <details key={card.title}>
+              <summary>{card.title}</summary>
+              <p>{card.body}</p>
             </details>
           ))}
         </div>
+        <div className="pilot-offer">
+          <div>
+            <span className="eyebrow">Governed pilot offer</span>
+            <h3>{pilotOffer.title}</h3>
+            <p>{pilotOffer.body}</p>
+            <small>{pilotOffer.note}</small>
+          </div>
+          <MediaFrame className="pilot-media" media={coreSenseImages.sectors} />
+        </div>
       </section>
 
-      <section className="final-cta" id="demo">
-        <span>Governed pilot candidate</span>
-        <h2>Turn invisible heat strain into one clear action.</h2>
-        <p>
-          CoreSense is a safety decision-support prototype, not a clinical
-          thermometer or medical device. It works beside site WBGT and existing
-          heat controls, not in place of them.
-        </p>
-        <div className="final-cta-actions">
-          <Button href="#overview">Review the system</Button>
-          <Button href="#evidence" variant="secondary">
-            Explore the evidence
+      <section className="ai-use section-pad dark-section" id="ai-use">
+        <SectionHeading
+          eyebrow={aiDisclosure.eyebrow}
+          title={aiDisclosure.title}
+          body={aiDisclosure.body}
+          light
+        />
+        <p className="required-boundary">{requiredBoundary}</p>
+        <div className="closing-actions">
+          <Button href={demoUrl}>Open interactive demo</Button>
+          <Button href="#technical-proof" variant="secondary">
+            View validation boundary
           </Button>
         </div>
       </section>
 
       <footer className="site-footer">
-        <div className="footer-top">
-          <div className="footer-brand">
-            <a className="brand footer-wordmark" href="#top">
-              <span className="brand-mark" aria-hidden>
-                CS
-              </span>
-              <span className="brand-name">CoreSense</span>
-            </a>
-            <p>
-              Personal heat-risk guidance at the edge, with uncertainty visible
-              and the next worker action clear.
-            </p>
-          </div>
-          <h2>Built for accountable heat-safety pilots.</h2>
-        </div>
-        <nav className="footer-links" aria-label="Page sections">
+        <a className="brand footer-brand" href="#top" aria-label="Back to CoreSense top">
+          <span className="brand-mark" aria-hidden>
+            CS
+          </span>
+          <span className="brand-name">CoreSense</span>
+        </a>
+        <p>{footerStatement}</p>
+        <p className="footer-boundary">{requiredBoundary}</p>
+        <nav className="footer-links" aria-label="CoreSense page sections">
           {footerLinks.map((link) => (
             <a href={link.href} key={link.href}>
               {link.label}
             </a>
           ))}
         </nav>
+        <Button href={demoUrl}>Open interactive demo</Button>
       </footer>
+
       {selectedDocument ? (
         <Suspense fallback={null}>
           <DocumentLibrary

@@ -13,20 +13,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CoreSense | Personal Heat-Risk Safety",
+  metadataBase: new URL("https://core-sense.vercel.app"),
+  title: "CoreSense — Heat-health actions workers can use",
   description:
-    "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
+    "CoreSense is a privacy-limited worker heat-strain advisory system that combines an action-first wrist display, site heat context, supervisor response and a reviewable evidence trail.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "CoreSense | Personal Heat-Risk Safety",
+    title: "CoreSense — Heat-health actions workers can use",
     description:
-      "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
+      "From invisible heat strain to one clear action: work safely, pause, or rest now.",
+    url: "/",
+    siteName: "CoreSense",
+    type: "website",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CoreSense | Personal Heat-Risk Safety",
+    title: "CoreSense — Heat-health actions workers can use",
     description:
-      "Individual heat-strain guidance for industrial workers, with edge decisions and a clear supervisor evidence trail.",
+      "From invisible heat strain to one clear action: work safely, pause, or rest now.",
     images: ["/og.png"],
   },
   icons: {
