@@ -49,10 +49,24 @@ export const coreSenseImages = {
     concept: true,
     position: "center center",
   },
-  sectors: {
+  applicationConstruction: {
     kind: "image",
-    src: "/coresense/sector-impact.png",
-    alt: "Construction, plantation, and logistics work settings",
+    src: "/coresense/application-construction.jpg",
+    alt: "Construction worker taking a preventive hydration break with a supervisor nearby",
+    concept: true,
+    position: "center center",
+  },
+  applicationPlantation: {
+    kind: "image",
+    src: "/coresense/application-plantation.jpg",
+    alt: "Palm-estate crew returning calmly to a shaded rest shelter",
+    concept: true,
+    position: "center center",
+  },
+  applicationLogistics: {
+    kind: "image",
+    src: "/coresense/application-logistics.jpg",
+    alt: "Logistics crew receiving a heat-safety briefing beside a shaded recovery point",
     concept: true,
     position: "center center",
   },
@@ -66,9 +80,9 @@ export const coreSenseImages = {
   },
   productVideo: {
     kind: "video",
-    src: "/coresense/product-hero.mp4",
-    poster: "/coresense/product-concept.png",
-    alt: "CoreSense rugged round-display band rotating in a studio concept",
+    src: "/coresense/product-assembly-concept.mp4",
+    poster: "/coresense/product-assembly-concept-poster.jpg",
+    alt: "CoreSense round-display worker band shown through a concept assembly sequence",
     concept: true,
     evidenceLabel: labels.conceptProduct,
     position: "center center",
@@ -392,6 +406,24 @@ export const beneficiaries = {
   eyebrow: "Beneficiaries and pilot",
   title: "Built for workers. Evaluated with site teams.",
 };
+
+export const applicationScenes = [
+  {
+    title: "Construction",
+    body: "Support early hydration and rest action alongside measured site WBGT and existing work controls.",
+    media: coreSenseImages.applicationConstruction,
+  },
+  {
+    title: "Palm operations",
+    body: "Give estate and mill teams a language-aware action and a reviewable shift-response context.",
+    media: coreSenseImages.applicationPlantation,
+  },
+  {
+    title: "Logistics",
+    body: "Coordinate acknowledgement, recovery and escalation across hot yards and warehouse operations.",
+    media: coreSenseImages.applicationLogistics,
+  },
+] as const;
 
 export const beneficiaryCards = [
   {

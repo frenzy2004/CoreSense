@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MalaysiaEvidenceMap } from "./MalaysiaEvidenceMap";
 import {
   aiDisclosure,
+  applicationScenes,
   beneficiaries,
   beneficiaryCards,
   coreSenseImages,
@@ -395,6 +396,25 @@ export function SmartWatchClone() {
 
       <section className="pilot section-pad" id="pilot">
         <SectionHeading eyebrow={beneficiaries.eyebrow} title={beneficiaries.title} />
+        <div className="applications-heading">
+          <span className="eyebrow">Application contexts</span>
+          <h3>Prevention that fits the work setting.</h3>
+          <p>
+            These concept scenes illustrate intended use contexts. They are not field deployments,
+            partners, customers or measured outcomes.
+          </p>
+        </div>
+        <div className="application-grid">
+          {applicationScenes.map((scene) => (
+            <article className="application-card" key={scene.title}>
+              <MediaFrame media={scene.media} />
+              <div>
+                <h4>{scene.title}</h4>
+                <p>{scene.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
         <div className="beneficiary-grid">
           {beneficiaryCards.map((card) => (
             <details key={card.title}>
@@ -410,7 +430,6 @@ export function SmartWatchClone() {
             <p>{pilotOffer.body}</p>
             <small>{pilotOffer.note}</small>
           </div>
-          <MediaFrame className="pilot-media" media={coreSenseImages.sectors} />
         </div>
       </section>
 

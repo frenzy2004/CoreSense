@@ -1026,6 +1026,57 @@ video {
   background: var(--white);
 }
 
+.applications-heading {
+  max-width: 720px;
+  margin: 3rem 0 1.5rem;
+}
+
+.applications-heading h3 {
+  margin: 0.65rem 0 0;
+  color: var(--ink);
+  font-size: 1.65rem;
+  line-height: 1.12;
+}
+
+.applications-heading p {
+  margin: 0.8rem 0 0;
+  color: var(--muted-dark);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.application-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.application-card {
+  min-width: 0;
+}
+
+.application-card .media-frame {
+  aspect-ratio: 16 / 10;
+}
+
+.application-card > div {
+  padding-top: 1rem;
+}
+
+.application-card h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.application-card p {
+  margin: 0.55rem 0 0;
+  color: var(--muted-dark);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
 .beneficiary-grid {
   display: grid;
   align-items: start;
@@ -1037,13 +1088,15 @@ video {
 }
 
 .pilot-offer {
-  display: grid;
-  gap: 1.5rem;
   margin-top: 3rem;
-  padding: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
   border-radius: var(--radius);
   color: var(--white);
   background: var(--ink);
+}
+
+.pilot-offer > div {
+  max-width: 880px;
 }
 
 .pilot-offer h3 {
@@ -1059,10 +1112,6 @@ video {
   margin-top: 1rem;
   color: var(--cyan);
   font-weight: 720;
-}
-
-.pilot-media {
-  aspect-ratio: 16 / 10;
 }
 
 .ai-use .section-heading {
@@ -1399,6 +1448,14 @@ video {
     border-top: 0;
   }
 
+  .application-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .application-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   .problem-card {
     padding: 1.5rem;
     border: 1px solid var(--line);
@@ -1411,8 +1468,7 @@ video {
 
   .solution-intro,
   .editorial-grid,
-  .weather-panel,
-  .pilot-offer {
+  .weather-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     gap: 3rem;
@@ -1601,6 +1657,14 @@ video {
   .truth-ladder-list,
   .beneficiary-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .application-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .application-card:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   .beneficiary-grid details:last-child:nth-child(odd) {

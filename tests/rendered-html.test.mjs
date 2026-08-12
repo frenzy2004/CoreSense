@@ -77,6 +77,7 @@ const requiredBoundaries = [
   "DETERMINISTIC SIMULATION · NO PHYSICAL DOWNLINK",
   "WOKWI BEHAVIORAL MODEL · SIMULATION",
   "AI-GENERATED CONCEPT VISUAL · NOT FIELD FOOTAGE",
+  "AI-GENERATED CONCEPT — NOT THE ACTUAL PRODUCT",
   "DEMO_UNVALIDATED_V1",
   "Official sources reviewed 10 August 2026",
 ];
@@ -167,7 +168,7 @@ test("references existing local CoreSense media and preserves motion labels", as
     await access(new URL(`../public${assetPath}`, import.meta.url));
   }
   for (const video of [
-    "/coresense/product-hero.mp4",
+    "/coresense/product-assembly-concept.mp4",
     "/coresense/heat-hydration.mp4",
     "/coresense/storm-recall.mp4",
   ]) {
@@ -177,6 +178,14 @@ test("references existing local CoreSense media and preserves motion labels", as
   assert.match(appSource, /playsInline/);
   assert.match(appSource, /prefers-reduced-motion:\s*reduce/);
   assert.doesNotMatch(appSource, /video-control/);
+  for (const applicationImage of [
+    "/coresense/application-construction.jpg",
+    "/coresense/application-plantation.jpg",
+    "/coresense/application-logistics.jpg",
+  ]) {
+    assert.match(contentSource, new RegExp(escapeRegExp(applicationImage)));
+  }
+  assert.doesNotMatch(appSource, /coreSenseImages\.sectors/);
 });
 
 test("does not repeat the same visual family across adjacent story sections", () => {
