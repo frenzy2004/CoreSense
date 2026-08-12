@@ -103,6 +103,22 @@ export const coreSenseImages = {
     concept: true,
     position: "center center",
   },
+  useCaseConstruction: {
+    kind: "video",
+    src: "/coresense/use-case-construction-heat.mp4",
+    poster: "/coresense/use-case-construction-heat-poster.jpg",
+    alt: "Construction worker checking a blue round-display band beside a shaded hydration point",
+    concept: true,
+    position: "center center",
+  },
+  useCasePlantation: {
+    kind: "video",
+    src: "/coresense/use-case-plantation-shelter.mp4",
+    poster: "/coresense/use-case-plantation-shelter-poster.jpg",
+    alt: "Palm-estate worker checking a blue round-display band while a supervisor directs the crew toward shelter",
+    concept: true,
+    position: "center center",
+  },
   wokwiBuild: {
     kind: "image",
     src: "/coresense/wokwi-build-preview.png",
@@ -406,6 +422,25 @@ export const beneficiaries = {
   eyebrow: "Beneficiaries and pilot",
   title: "Built for workers. Evaluated with site teams.",
 };
+
+export const useCases = {
+  eyebrow: "Use cases",
+  title: "A clear cue. A practical next step.",
+  body: "Two concept scenarios place the CoreSense band inside existing site procedures. They illustrate intended use, not field deployment or measured outcomes.",
+};
+
+export const useCaseScenes = [
+  {
+    title: "Heat-rest action on site",
+    body: "The band makes the next heat-rest action visible beside the site's shaded hydration point and existing supervisor response.",
+    media: coreSenseImages.useCaseConstruction,
+  },
+  {
+    title: "Shelter response in palm operations",
+    body: "The band sits within a supervisor-led return-to-shelter workflow while existing site procedures remain authoritative.",
+    media: coreSenseImages.useCasePlantation,
+  },
+] as const;
 
 export const applicationScenes = [
   {

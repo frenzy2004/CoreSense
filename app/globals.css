@@ -1026,6 +1026,44 @@ video {
   background: var(--white);
 }
 
+.use-cases {
+  border-top: 1px solid var(--dark-line);
+}
+
+.use-case-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.use-case-card {
+  min-width: 0;
+}
+
+.use-case-card .media-frame {
+  aspect-ratio: 16 / 9;
+}
+
+.use-case-copy {
+  padding-top: 1rem;
+  border-top: 1px solid var(--dark-line);
+}
+
+.use-case-copy h3 {
+  margin: 0;
+  color: var(--white);
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.use-case-copy p {
+  max-width: 38rem;
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
 .applications-heading {
   max-width: 720px;
   margin: 3rem 0 1.5rem;
@@ -1449,6 +1487,10 @@ video {
   }
 
   .application-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .use-case-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

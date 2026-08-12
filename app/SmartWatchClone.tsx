@@ -30,6 +30,8 @@ import {
   supervisorExperience,
   systemSteps,
   technicalProof,
+  useCases,
+  useCaseScenes,
   weatherContext,
   weatherRules,
   workerExperience,
@@ -313,6 +315,26 @@ export function SmartWatchClone() {
         <Button href={demoUrl}>Open interactive demo</Button>
       </div>
     </section>
+
+      <section className="use-cases section-pad dark-section" id="use-cases">
+        <SectionHeading
+          eyebrow={useCases.eyebrow}
+          title={useCases.title}
+          body={useCases.body}
+          light
+        />
+        <div className="use-case-grid">
+          {useCaseScenes.map((scene) => (
+            <article className="use-case-card" key={scene.title}>
+              <MediaFrame media={scene.media} />
+              <div className="use-case-copy">
+                <h3>{scene.title}</h3>
+                <p>{scene.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="malaysia-evidence section-pad" id="malaysia-evidence">
         <MalaysiaEvidenceMap />

@@ -88,6 +88,7 @@ const sectionIds = [
   'id="solution-loop"',
   'id="worker-experience"',
   'id="supervisor-experience"',
+  'id="use-cases"',
   'id="malaysia-evidence"',
   'id="technical-proof"',
   'id="pilot"',
@@ -171,6 +172,8 @@ test("references existing local CoreSense media and preserves motion labels", as
     "/coresense/product-assembly-concept.mp4",
     "/coresense/heat-hydration.mp4",
     "/coresense/storm-recall.mp4",
+    "/coresense/use-case-construction-heat.mp4",
+    "/coresense/use-case-plantation-shelter.mp4",
   ]) {
     assert.match(contentSource, new RegExp(escapeRegExp(video)));
   }
@@ -186,6 +189,8 @@ test("references existing local CoreSense media and preserves motion labels", as
     assert.match(contentSource, new RegExp(escapeRegExp(applicationImage)));
   }
   assert.doesNotMatch(appSource, /coreSenseImages\.sectors/);
+  assert.match(appSource, /useCaseScenes\.map/);
+  assert.match(cssSource, /\.use-case-grid/);
 });
 
 test("does not repeat the same visual family across adjacent story sections", () => {
