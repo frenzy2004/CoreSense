@@ -16,7 +16,7 @@ export type SourceCard = {
   boundary: string;
 };
 
-export const demoUrl = "https://coresense-demo.vercel.app/demo";
+export const demoUrl = "https://core-sense-demo.vercel.app/demo";
 
 export const labels = {
   conceptVisual: "AI-GENERATED CONCEPT VISUAL · NOT FIELD FOOTAGE",

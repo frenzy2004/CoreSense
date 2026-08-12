@@ -43,7 +43,7 @@ const allPageSource = [
 ].join("\n");
 
 const vercelConfig = JSON.parse(await readSource("vercel.json"));
-const demoUrl = "https://coresense-demo.vercel.app/demo";
+const demoUrl = "https://core-sense-demo.vercel.app/demo";
 const officialSourceUrls = [
   "https://dosh.gov.my/wp-content/uploads/2025/03/Act-514-Reprint-Version-1.6.2024_English.pdf",
   "https://dosh.gov.my/wp-content/uploads/2026/03/ve_gl_heat-stress-management-at-wplace-2016.pdf",
